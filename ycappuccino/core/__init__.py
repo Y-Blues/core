@@ -1,6 +1,6 @@
 # YCappuccino ycappuccino.core default need to have a interaction with client
 
-import framework
+from . import framework
 
 
 def init(root_path=None, app=None, port=9000):

@@ -9,8 +9,8 @@ Starts the Pelix framework and ycappuccino_core ycappuccino_core
 import logging
 import sys
 import os
-import utils
-from utils import MyMetaFinder
+from . import utils
+from .utils import MyMetaFinder
 
 
 sys.path.append(os.getcwd())
@@ -106,9 +106,9 @@ def init(root_dir=None, app=None, layers=None, port=9000):
         # EventAdmin,
         'pelix.services.eventadmin',
         'pelix.shell.eventadmin',
-        'bundles.configuration',
-        'bundles.activity_logger',
-        'bundles.proxy'
+        'ycappuccino.core.bundles.configuration',
+        'ycappuccino.core.bundles.activity_logger',
+        'ycappuccino.core.bundles.proxy'
 
     ))
 

@@ -1,6 +1,6 @@
 #app="all"
 
-from api import  IActivityLogger, IConfiguration, YCappuccino, IServerProxy
+from ..api import  IActivityLogger, IConfiguration, YCappuccino, IServerProxy
 import logging
 from pelix.ipopo.decorators import ComponentFactory, Requires, Validate, Invalidate, Property, Provides, Instantiate, BindField, UnbindField
 import pelix.http

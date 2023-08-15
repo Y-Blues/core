@@ -5,7 +5,7 @@ import logging
 from pelix.ipopo.decorators import ComponentFactory, Provides, Validate, \
     Invalidate, Instantiate
 import shutil
-from api import IConfiguration
+from ..api import IConfiguration
 
 FILE_NAME = {'key': 'file_name', 'default': "config.properties"}
 

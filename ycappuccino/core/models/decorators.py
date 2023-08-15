@@ -1,7 +1,7 @@
 #app="all"
 # decorators to describe item and element to store in mongo if it's mongo element
 import functools
-from .models.utils import YDict
+from .utils import YDict
 
 primitive = (int, str, bool, float, )
 

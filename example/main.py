@@ -1,4 +1,4 @@
-from __init__ import init, start
+from ycappuccino.core import init, start
 import logging
 import argparse
 

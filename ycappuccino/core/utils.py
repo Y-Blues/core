@@ -6,7 +6,7 @@ import re
 from threading import current_thread
 from importlib.abc import Loader, MetaPathFinder
 from importlib.util import spec_from_file_location
-import framework
+from . import framework
 import logging
 
 _logger = logging.getLogger(__name__)
