@@ -32,6 +32,25 @@ class IConfiguration(object):
         """ abstract constructor """
 
 
+class YCappuccino(object):
+    """ interface of YCappuccino component """
+    name = CFQCN.build("YCappuccino")
+
+    def __init__(self):
+        """ abstract constructor """
+        self._id = None
+
+    def id(self):
+        return self._id
+
+class IListComponent(object):
+    """ interface of YCappuccino component """
+    name = CFQCN.build("IListComponent")
+
+    def __init__(self):
+        """ abstract constructor """
+        pass
+
 class IServerProxy(object):
     """ interface of YCappuccino component """
     name = CFQCN.build("IServerProxy")
