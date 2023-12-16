@@ -3,9 +3,9 @@
 import setuptools
 
 setuptools.setup(
-    name="ycappuccino.core",
+    name="ycappuccino_core",
     version="0.0.1",
-    description="A framewore core library for declaring component based software app",
+    description="A framewore ycappuccino_core library for declaring component based software app",
     url="https://github.com/Y-Blues/core",
     author="Aurelien Pisu",
     author_email="aurelie.pisu@gmail.com",

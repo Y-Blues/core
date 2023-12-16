@@ -1,7 +1,7 @@
 # project/test.py
 
 import unittest
-from ycappuccino.core.bundles.configuration import Configuration
+
 
 class TestConfiguration(unittest.TestCase):
 

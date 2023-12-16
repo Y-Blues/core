@@ -1,7 +1,7 @@
 # project/test.py
 
 import unittest
-from ycappuccino.core.bundles.activity_logger import ActivityLogger
+
 
 class TestLogger(unittest.TestCase):
 

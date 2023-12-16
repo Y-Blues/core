@@ -2,5 +2,13 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../api" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../endpoints_service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../endpoints_storage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../iot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../permissions" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../scheduler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../scripts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../storage" vcs="Git" />
   </component>
 </project>

@@ -4,55 +4,212 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="429dacd5-1b44-48f1-a6ae-fd4293949238" name="Changes" comment="">
+    <list default="true" id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="start refactoring micro service">
+      <change afterPath="$PROJECT_DIR$/example/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/example/data/log/Log-Activity-main.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/example/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/ui/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/example/data/log/Log-Activity-main.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/example/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/bundles/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/example/data/log/Log-Activity-main.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/example/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/bundles/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/example/data/log/Log-Activity-main.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/example/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/tests/test_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/data/log/Log-Activity-main.log" beforeDir="false" afterPath="$PROJECT_DIR$/example/data/log/Log-Activity-main.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ycappuccino/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/example/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_activify_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_activify_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_configuration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/bundles/activity_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/bundles/configuration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/bundles/proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/models/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/build/lib/models/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/bundles/activity_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/bundles/configuration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/bundles/proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/decorator_app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/executor_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/framework.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/models/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/models/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/ycappuccino_core.egg-info/PKG-INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/ycappuccino_core.egg-info/SOURCES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/ycappuccino_core.egg-info/dependency_links.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/ycappuccino_core.egg-info/requires.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/core/ycappuccino_core.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/.idea/endpoints.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/.idea/endpoints.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/beans.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/ycappuccino_endpoints/bundles/endpoint_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/bundles/client_path.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/bundles/endpoints.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/bundles/util_swagger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/bundles/utils_header.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/client_swagger/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/test_endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/test_jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_jwt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/test_service_path.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_service_path.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/test_util_swagger.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_util_swagger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints/tests/test_utils_header.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_utils_header.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/beans.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/bundles/endpoint_storage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/index.html.save" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/ycappuccino/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/ycappuccino/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/ycappuccino/core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/ycappuccino/core/framework.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/client_pyscript_core/ycappuccino/core/list_components.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/endpoints_storage/tests/test_endpoint_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/tests/test_endpoint_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/bundles/index_endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bundles/index_endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/core_bootstrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/core_bootstrap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bundles/jwt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/media.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/media.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/organization.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/organization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/role.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/role_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/role_account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/role_permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/role_permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/ui/client_path.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/ui/client_path.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/models/ui/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/ui/layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/services/login_services.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/login_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/services/tenant_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/tenant_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/bundles/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/bundles/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/models/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/models/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/models/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/models/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/bundles/script_interpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/bundles/script_interpreter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/bundles/item_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/item_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/bundles/manager_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/manager_upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/bundles/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/managers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/models/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/bundles/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/bundles/storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino/storage/mongo/tests/test_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/tests/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
-  <component name="ProjectId" id="2U1fGciSO4O7Vok66wCaLKJEo9T" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../hosts" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/codecs.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/dns/rdata.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/pelix/framework.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VDU42IsBicHjLRNddmxt9Gs9gW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/Documents/repositories/core",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Documents/repositories/ycappuccino/api&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyDependenciesConfigurable&quot;
   }
-}]]></component>
+}</component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="endpoints" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="endpoints" />
+      </console-settings>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Documents\repositories\core\src\ycappuccino" />
+      <recent name="E:\Documents\repositories\ycappuccino\api" />
+      <recent name="E:\Documents\repositories\ycappuccino\service_comm\ycappuccino_service_comm\bundles" />
+      <recent name="E:\Documents\repositories\ycappuccino\service_comm_storage\ycappuccino_service_comm_storage\bundles" />
+      <recent name="E:\Documents\repositories\ycappuccino\service_comm_storage\ycappuccino_service_comm_storage\models" />
+      <recent name="E:\Documents\repositories\ycappuccino\service_comm_storage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Documents\repositories\core\ycappuccino" />
-      <recent name="E:\Documents\repositories\core" />
+      <recent name="E:\Documents\repositories\ycappuccino\api\ycappuccino_api\core" />
+      <recent name="E:\Documents\repositories\ycappuccino\api\ycappuccino_api\storage" />
+      <recent name="E:\Documents\repositories\ycappuccino\api\ycappuccino_api\service_comm" />
+      <recent name="E:\Documents\repositories\ycappuccino\api\ycappuccino_api\scripts" />
+      <recent name="E:\Documents\repositories\ycappuccino\api\ycappuccino_api\scheduler" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.setup">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="core" />
+  <component name="RunManager" selected="Python.swagger">
+    <configuration name="endpoints_service" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="endpoints_service" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../endpoints_service/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../endpoints_service/example/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -61,19 +218,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="setup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="core" />
+    <configuration name="endpoints_storage" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="endpoints_storage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ycappuccino/core" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../endpoints_storage/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Documents\repositories\core\ycappuccino\setup.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../endpoints_storage/example/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -82,22 +239,121 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="hosts" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="host" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../hosts/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../hosts/example/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="permissions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="permissions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../permissions/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../permissions/example/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="swagger" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="swagger" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../swagger/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../swagger/example/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.hosts" />
+      <item itemvalue="Python.swagger" />
+      <item itemvalue="Python.endpoints_service" />
+      <item itemvalue="Python.permissions" />
+      <item itemvalue="Python.endpoints_storage" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.setup" />
-        <item itemvalue="Python.main" />
+        <item itemvalue="Python.swagger" />
+        <item itemvalue="Python.hosts" />
+        <item itemvalue="Python.permissions" />
+        <item itemvalue="Python.endpoints_service" />
+        <item itemvalue="Python.endpoints_storage" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="429dacd5-1b44-48f1-a6ae-fd4293949238" name="Changes" comment="" />
-      <created>1692111912802</created>
+      <changelist id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="" />
+      <created>1694369950801</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1692111912802</updated>
+      <updated>1694369950801</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="start refactoring micro service" />
+    <option name="LAST_COMMIT_MESSAGE" value="start refactoring micro service" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ycappuccino_core/utils.py</url>
+          <line>152</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="remote_server._id" language="Python" />
+        <watch expression="len(list_remote_server)" language="Python" />
+        <watch expression="w_module.__path__" language="Python" />
+        <watch expression="remote_server._id" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
