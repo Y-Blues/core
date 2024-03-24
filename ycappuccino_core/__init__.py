@@ -1,11 +1,14 @@
 # YCappuccino ycappuccino_storage.ycappuccino_core default need to have a interaction with client
 
-from . import framework
+from .framework import Framework
 
-
-def init(root_path=None, app=None, layers=None, bundle_prefix=None,  port=9000):
-    framework.init(root_path, app, layers, bundle_prefix, port)
-
+fw: Framework = None
+def init(application_yaml):
+    global fw
+    fw = Framework.get_framework()
+    fw.init(application_yaml)
 
 def start():
-    framework.start()
+    global fw
+
+    fw.start()
