@@ -12,5 +12,6 @@
     <orderEntry type="module" module-name="service_comm_storage" />
     <orderEntry type="module" module-name="api" />
     <orderEntry type="module" module-name="endpoints" />
+    <orderEntry type="module" module-name="mongo" />
   </component>
 </module>

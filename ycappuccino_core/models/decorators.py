@@ -250,35 +250,36 @@ def Property(name, type="string", minLength=None, maxLength=None, minimum=None, 
             else:
                 args[0]._mongo_model[w_name] = args[1]
 
-            w_item = map_item_by_class[args[0].__class__.__name__]
-            w_item["schema"]["properties"][w_name] = {
-                "type": type,
-                "description": "{}".format(w_name)
-            }
+            if args[0].__class__.__name__ in map_item_by_class:
+                w_item = map_item_by_class[args[0].__class__.__name__]
+                w_item["schema"]["properties"][w_name] = {
+                    "type": type,
+                    "description": "{}".format(w_name)
+                }
 
-            if minLength:
-                w_item["schema"]["properties"][w_name]["minLength"] = minLength
+                if minLength:
+                    w_item["schema"]["properties"][w_name]["minLength"] = minLength
 
-            if maxLength:
-                w_item["schema"]["properties"][w_name]["maxLength"] = maxLength
+                if maxLength:
+                    w_item["schema"]["properties"][w_name]["maxLength"] = maxLength
 
-            if minimum:
-                w_item["schema"]["properties"][w_name]["minimum"] = minimum
+                if minimum:
+                    w_item["schema"]["properties"][w_name]["minimum"] = minimum
 
-            if exclusiveMinimum:
-                w_item["schema"]["properties"][w_name]["exclusiveMinimum"] = exclusiveMinimum
+                if exclusiveMinimum:
+                    w_item["schema"]["properties"][w_name]["exclusiveMinimum"] = exclusiveMinimum
 
-            if maximum:
-                w_item["schema"]["properties"][w_name]["maximum"] = maximum
+                if maximum:
+                    w_item["schema"]["properties"][w_name]["maximum"] = maximum
 
-            if exclusiveMaximum:
-                w_item["schema"]["properties"][w_name]["exclusiveMaximum"] = exclusiveMaximum
+                if exclusiveMaximum:
+                    w_item["schema"]["properties"][w_name]["exclusiveMaximum"] = exclusiveMaximum
 
 
-            if "private_property" not in w_item:
-                w_item["private_property"] = []
-            if private and name not in w_item["private_property"]:
-                w_item["private_property"].append(w_name)
+                if "private_property" not in w_item:
+                    w_item["private_property"] = []
+                if private and name not in w_item["private_property"]:
+                    w_item["private_property"].append(w_name)
             return value
         return wrapper_proprety
     return decorator_property

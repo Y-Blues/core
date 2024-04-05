@@ -1,50 +1,43 @@
-#app="all"
+# app="all"
 
 import os
 import logging
-from pelix.ipopo.decorators import ComponentFactory, Provides, Validate, \
-    Invalidate, Instantiate
+
 import shutil
 from ycappuccino_api.core.api import IConfiguration
 
-FILE_NAME = {'key': 'file_name', 'default': "config.properties"}
+FILE_NAME = {"key": "file_name", "default": "config.properties"}
 
-'''
 
+"""
 component that provide a configuration component and store config in a properties file 
 
 @author: apisu
-'''
-@ComponentFactory('Configuration-Factory')
-@Provides(IConfiguration.name, controller='_service_controller')
-@Instantiate("config")
-class Configuration(IConfiguration):
+"""
 
-    def __init__(self):
+
+class Configuration(IConfiguration):
+    """
+    Configuration component
+    """
+
+    def __init__(self, file_name: str = "config.properties") -> None:
+        super().__init__()
         self._log = logging.getLogger(__name__)
         """ Logger """
-        self._file_name = "config.properties"
+        self._file_name = file_name
         """ Configuration file name, injected """
-        self._path = None
-        """ Path to config file """
-        self._dict = {}
-        """ Configuration dictionary """
-        self._service_controller = True  # service controller
-
-    @Validate
-    def validate(self, context=None):
-        self._log.info("Validating '{0}' ...".format(__name__))
         self._path = self._get_path()
         self._log.info("Configuration file path: [{0}]".format(self._path))
         self._dict = self.read(self._path) or {}
 
         self._log.info("Configuration size : [{0}]".format(len(self._dict)))
-        self._log.info("Validated.")
 
-    @Invalidate
-    def invalidate(self, _):
-        self._log.info("Invalidating '{0}' ...".format(__name__))
-        self._log.info("Invalidated.")
+    async def start(self):
+        self._log.info("start configuration")
+
+    async def stop(self):
+        self._log.info("stop configuration")
 
     def get(self, key, default=None):
         """
@@ -71,7 +64,7 @@ class Configuration(IConfiguration):
         return key in self._dict
 
     def backupConfig(self):
-        """ backup last configuration file """
+        """backup last configuration file"""
         shutil.copy(self._path, self._path + ".back")
 
     def set(self, key, value):
@@ -95,10 +88,10 @@ class Configuration(IConfiguration):
             return os.path.join(path, "base", "conf", self._file_name)
         return self._file_name
 
-    def get_base(self ):
-        return os.getcwd()+"/"+"conf"
+    def get_base(self):
+        return os.getcwd() + "/" + "conf"
 
-    def get_data(self ):
+    def get_data(self):
         return os.getcwd() + "/"
 
     @classmethod
@@ -112,14 +105,14 @@ class Configuration(IConfiguration):
                 if conf and not conf.startswith("#"):
                     key_value = conf.split("=")
                     key = key_value[0].strip()
-                    value = "=".join(key_value[1:]).strip().strip("\"")
+                    value = "=".join(key_value[1:]).strip().strip('"')
                     if value == "true":
                         props[key] = True
                     elif value == "false":
                         props[key] = False
                     else:
                         props[key] = value
-                    if (aLogger != None):
+                    if aLogger != None:
                         aLogger.info("Configuration {0}=[{1}]".format(key, value))
 
         return props

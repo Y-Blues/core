@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/../endpoints_storage/.idea/endpoints_storage.iml" filepath="$PROJECT_DIR$/../endpoints_storage/.idea/endpoints_storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/../hosts/.idea/host.iml" filepath="$PROJECT_DIR$/../hosts/.idea/host.iml" />
       <module fileurl="file://$PROJECT_DIR$/../iot/.idea/iot.iml" filepath="$PROJECT_DIR$/../iot/.idea/iot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mongo/.idea/mongo.iml" filepath="$PROJECT_DIR$/../mongo/.idea/mongo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../permissions/.idea/permissions.iml" filepath="$PROJECT_DIR$/../permissions/.idea/permissions.iml" />
       <module fileurl="file://$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" filepath="$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/../scripts/.idea/scripts.iml" filepath="$PROJECT_DIR$/../scripts/.idea/scripts.iml" />

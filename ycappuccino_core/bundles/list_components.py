@@ -1,48 +1,56 @@
-from pelix.ipopo.decorators import ComponentFactory, Requires, Validate, Invalidate, Instantiate, BindField, \
-    UnbindField, Provides
-from ycappuccino_api.core.api import IListComponent, YCappuccino
+from pelix.ipopo.decorators import (
+    ComponentFactory,
+    Requires,
+    Validate,
+    Invalidate,
+    Instantiate,
+    BindField,
+    UnbindField,
+    Provides,
+)
+from ycappuccino_api.core.api import IListComponent, IActivityLogger
+from ycappuccino_api.core.base import YCappuccinoType
+from ycappuccino_api.proxy.api import YCappuccinoRemote
 
 list_component = None
 
-'''
+"""
 
 component that aggregate all YCappuccino component 
 
 @author: apisu
-'''
-@ComponentFactory('ListComponent-Factory')
-@Requires("_list_component", YCappuccino.name, aggregate=True, optional=True)
-@Provides(specifications=[IListComponent.name])
-@Instantiate("ListComponent")
+"""
+
+
 class ListComponent(IListComponent):
 
-    def __init__(self):
+    def __init__(
+        self,
+        logger: YCappuccinoType(IActivityLogger, "(name=main)"),
+    ) -> None:
+        """
+        Constructor
+        """
         super(ListComponent, self).__init__()
         global list_component
         list_component = self
-        self._list_component = []
         self._map_component = {}
+        self._logger = logger
 
+    async def bind(self, a_service: YCappuccinoRemote):
+        """bind statement for this component"""
+        self._map_component[a_service.id()] = a_service
+
+    async def un_bind(self, a_service: YCappuccinoRemote):
+        """unbind statement for this component"""
+        del self._map_component[a_service.id()]
 
     def call(self, a_comp_name, a_method):
         if a_comp_name in self._map_component.keys():
-            getattr(self._map_component[a_comp_name],a_method)()
+            getattr(self._map_component[a_comp_name], a_method)()
 
-    @BindField("_list_component")
-    def bind_component(self, field, a_service, a_service_reference):
-        self._map_component[a_service.id()] = a_service
+    async def start(self):
+        self._logger.info("start list component")
 
-    @UnbindField("_list_component")
-    def unbind_test1(self, field, a_service, a_service_reference):
-        del self._map_component[a_service.id()]
-
-
-
-    @Validate
-    def validate(self, context):
-        print("test")
-
-
-    @Invalidate
-    def invalidate(self, context):
-        pass
+    async def stop(self):
+        self._logger.info("stop list component")

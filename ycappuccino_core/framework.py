@@ -19,6 +19,7 @@ import inspect
 
 import yaml
 
+from ycappuccino_api.core.base import YCappuccinoComponentBind, YCappuccinoComponent
 from ycappuccino_core.utils import MyLoader
 
 sys.path.append(os.getcwd())
@@ -330,6 +331,31 @@ class Framework:
         binds: list[list] = []
         requires: list[list] = []
 
+        if self.is_ycappuccino_component_bind(component):
+            # manage type of bind to generate bind method
+            sign_bind = inspect.signature(component.bind)
+            for key, item in sign_bind.parameters.items():
+                if key != "self":
+                    if item.annotation.__name__ == "_UnionGenericAlias":
+                        pass
+                    else:
+                        _tuple = [
+                            item.annotation.__name__.lower(),
+                            item.annotation.__name__,
+                            True,
+                            True,
+                            "",
+                            True,
+                        ]
+
+                        requires.append(_tuple)
+
+                        elem = [
+                            item.annotation.__name__.lower(),
+                            item.annotation.__name__,
+                        ]
+                        binds.append(elem)
+
         properties: list[list] = []
         all: list[list] = []
         for key, item in sign.parameters.items():
@@ -339,12 +365,12 @@ class Framework:
                 all.append(elem)
 
             else:
-                options = ""
+                options = False
                 spec_filter = ""
                 _type = None
                 require = False
                 if type(item.annotation).__name__ == "_UnionGenericAlias":
-                    options = options + "optional=True"
+                    options = True
                     if item.annotation.__args__[0].__name__ == "YCappuccinoTypeDefault":
                         spec_filter = item.annotation.__args__[0].spec_filter
                         _type = item.annotation.__args__[0].type.__name__
@@ -361,13 +387,20 @@ class Framework:
                     require = True
 
                 if _type:
-                    _tuple = [key, _type, options, spec_filter, require]
+                    _tuple = [
+                        key,
+                        _type,
+                        False,
+                        options,
+                        spec_filter,
+                        require,
+                    ]
                     requires.append(_tuple)
                     all.append(_tuple)
         return {
             "requires": requires,
             "properties": properties,
-            "bind": binds,
+            "binds": binds,
             "all": all,
             "requires_spec": [require[1] for require in requires],
             "binds_spec": [bind[1] for bind in binds],
@@ -379,7 +412,27 @@ class Framework:
         first = True
         for supertype in a_klass.__mro__:
             if supertype is not inspect._empty:
-                if supertype.__name__ == "YCappuccinoComponent":
+                if supertype.__name__ == YCappuccinoComponent.__name__:
+                    if first:
+                        return False
+                    else:
+                        return True
+                elif include_pelix and a_klass is not inspect._empty:
+                    list_subclass = supertype.__subclasses__()
+                    for subclass in list_subclass:
+                        if hasattr(subclass, "_ipopo_property_getter"):
+                            return True
+
+            first = False
+        return False
+
+    def is_ycappuccino_component_bind(
+        self, a_klass: type, include_pelix: bool = False
+    ) -> bool:
+        first = True
+        for supertype in a_klass.__mro__:
+            if supertype is not inspect._empty:
+                if supertype.__name__ == YCappuccinoComponentBind.__name__:
                     if first:
                         return False
                     else:
@@ -396,15 +449,44 @@ class Framework:
     def get_dumps(
         self, kind: str, dec_tuple: list[list], parameter_dump: list[str] = []
     ) -> list[str]:
+        if dec_tuple is None:
+            return []
         properties_dump: list[str] = []
         for property in dec_tuple:
-            if property[2] != "":
+            if property[-1]:
                 properties_dump.append(
-                    f'@{kind}("{property[0]}","{property[1]}","{property[2]}")'
+                    f'@{kind}("{property[0]}", "{property[1]}", optional={property[2]},aggregate={property[3]}, spec_filter="{property[4]}")'
                 )
             else:
-                properties_dump.append(f'@{kind}("{property[0]}","{property[1]}")')
+                if kind == "Property":
+                    properties_dump.append(
+                        f'@{kind}("{property[0]}","{property[0]}","{property[2]}")'
+                    )
+                else:
+                    properties_dump.append(f'@{kind}("{property[0]}","{property[1]}")')
             parameter_dump.append(f"self.{property[0]} = None")
+
+        return properties_dump
+
+    def get_bind_dumps(
+        self, kind: str, dec_tuple: list[list], parameter_dump: list[str] = []
+    ) -> list[str]:
+        if dec_tuple is None:
+            return []
+        properties_dump: list[str] = []
+        for property in dec_tuple:
+            properties_dump.append(
+                f"""
+    @BindField("{property[0]}")
+    def bind_{property[0]}(self, field, service, service_ref):
+        asyncio.run(self._obj.bind(service))
+        
+    @UnbindField("{property[0]}")
+    def un_bind_{property[0]}(self, field, service, service_ref):
+        asyncio.run(self._obj.un_bind(service))
+
+"""
+            )
 
         return properties_dump
 
@@ -501,6 +583,12 @@ class Framework:
                     parameter_dump=parameters,
                     dec_tuple=props.get("requires"),
                 )
+                bind_methods: list[str] = self.get_bind_dumps(
+                    kind="BindField",
+                    parameter_dump=parameters,
+                    dec_tuple=props.get("binds"),
+                )
+                bind_methods_dump: str = "\n".join(bind_methods)
                 requires_dump: str = "\n".join(requires)
                 properties_dump: str = "\n".join(properties)
                 parameter_dump: str = "\n        ".join(parameters)
@@ -511,7 +599,7 @@ class Framework:
                 content = (
                     content
                     + f"""\n
-from pelix.ipopo.decorators import Instantiate, Requires, Provides, ComponentFactory, Property, Validate, Invalidate
+from pelix.ipopo.decorators import  BindField, UnbindField,Instantiate, Requires, Provides, ComponentFactory, Property, Validate, Invalidate
 import asyncio
 from ycappuccino_api.proxy.api import Proxy
 from {module.__name__} import {klass}
@@ -529,12 +617,13 @@ class {factory}Ipopo(Proxy):
         self._context = None
         {parameter_dump}
 
-    
+    {bind_methods_dump}
 
     @Validate
     def validate(self, context):
         self._objname = "{instance}"
         self._obj = {class_new}
+        self._obj._ipopo = self
         self._context = context
         asyncio.run(self._obj.start())
         
@@ -547,6 +636,8 @@ class {factory}Ipopo(Proxy):
 """
                 )
 
+        # with open(f"{a_path}".replace(".py", "_pelix") + ".py", "w") as f:
+        #     f.write(content)
         mymodule = ModuleType(pelix_module)
         exec(content, mymodule.__dict__)
         sys.modules[pelix_module] = mymodule

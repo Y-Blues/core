@@ -5,21 +5,166 @@
   </component>
   <component name="BlackConnectSettings" triggerOnEachSave="true" triggerOnReformat="true" />
   <component name="ChangeListManager">
-    <list default="true" id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="start refactoring micro service">
-      <change afterPath="$PROJECT_DIR$/../hosts/example/conf/application.yml" afterDir="false" />
+    <list default="true" id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="add mecanism to don't see ipopo/pelix packages">
+      <change afterPath="$PROJECT_DIR$/../api/ycappuccino_api/core/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/test_generate_ipopo_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/qrcode.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/release_yblues.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ycappuccino_core/app_runner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ycappuccino_core/bundles/sample.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints/ycappuccino_endpoints/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints_service/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints_service/ycappuccino_endpoints_service/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints_storage/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../endpoints_storage/ycappuccino_endpoints_storage/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm_storage/example/conf/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_storage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_storage_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_storage_mongo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/conf/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/storage_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/conf/config.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../swagger/example/conf/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../swagger/ycappuccino_swagger/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/core/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/core/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/endpoints/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/endpoints/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/host/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/host/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/permissions/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/permissions/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/proxy/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/proxy/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/scheduler/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/scheduler/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/scripts/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/scripts/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/service_comm/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/service_comm/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/ycappuccino_api/storage/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ycappuccino_api/storage/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ycappuccino_core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/example/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_activify_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_configuration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_executor_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/bundles/activity_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/bundles/configuration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/bundles/proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/models/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/build/lib/models/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/bundles/activity_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/bundles/configuration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/bundles/list_components.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/bundles/proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/decorator_app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/executor_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/framework.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/models/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/models/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/ycappuccino_core/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core.egg-info/PKG-INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core.egg-info/SOURCES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core.egg-info/dependency_links.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core.egg-info/requires.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core/bundles/activity_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/bundles/activity_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core/bundles/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/bundles/configuration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core/bundles/list_components.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/bundles/list_components.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core/decorator_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/decorator_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ycappuccino_core/framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/framework.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ycappuccino_core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/bundles/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/ycappuccino_scheduler/bundles/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ycappuccino_core/models/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/ycappuccino_core/models/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints/ycappuccino_endpoints/bundles/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints/ycappuccino_endpoints/bundles/endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/ycappuccino_endpoints_service/bundles/endpoint_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints_service/ycappuccino_endpoints_service/bundles/endpoint_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_storage/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_storage/ycappuccino_endpoints_storage/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_storage/ycappuccino_endpoints_storage/bundles/endpoint_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints_storage/ycappuccino_endpoints_storage/bundles/endpoint_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/data/log/Log-Activity-main.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/bootstrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/bootstrap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/bundles/index_endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/bundles/index_endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/host.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/host.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/host_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/host_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/replace_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/replace_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/replace_service_pyscript_index.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/ycappuccino_host/services/replace_service_pyscript_index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/clients/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/clients/ethernet_ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/clients/ethernet_ip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/clients/modbus.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/clients/modbus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/clients/opcua.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/clients/opcua.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/clients/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/clients/storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/services/device_fetchers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/services/device_fetchers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/services/device_rawdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/services/device_rawdata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/bundles/services/device_senders.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/services/device_senders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/bundles/clients/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/actuator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/actuator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/actuator_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/actuator_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/channel.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/channel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/channel_reference.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/channel_reference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/device.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/device.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/measure.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/measure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/models/setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/ycappuccino_iot/models/setting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bootstrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bootstrap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bundles/jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/bundles/jwt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/login_services.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/login_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/tenant_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/ycappuccino_permissions/services/tenant_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/bundles/script_interpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/ycappuccino_scripts/bundles/script_interpreter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_client_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_client_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_component_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_component_proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm/ycappuccino_service_comm/bundles/remote_component_proxy_factory.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm_storage/.idea/service_comm_storage.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm_storage/.idea/service_comm_storage.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service_comm_storage/example/main.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/bundles/remote_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/models/remote_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/../service_comm_storage/ycappuccino_service_comm_storage/models/remote_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/data/log/Log-Activity-main.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/item_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/item_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/manager_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/manager_upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/managers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/models/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/bundles/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../storage/ycappuccino_storage/bundles/mongo_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../storage/ycappuccino_storage/mongo/tests/test_storage.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../swagger/data/log/Log-Activity-main.log" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/data/log/Log-Activity-main.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swagger/example/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/example/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/example/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/ycappuccino_swagger/services/swagger.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/ycappuccino_swagger/services/swagger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/ycappuccino_swagger/services/util_swagger.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/ycappuccino_swagger/services/util_swagger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +449,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start refactoring micro service" />
-    <option name="LAST_COMMIT_MESSAGE" value="start refactoring micro service" />
+    <MESSAGE value="add mecanism to don't see ipopo/pelix packages" />
+    <option name="LAST_COMMIT_MESSAGE" value="add mecanism to don't see ipopo/pelix packages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -346,10 +492,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../api/ycappuccino_api/proxy/api.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="315" />
+          <line>50</line>
+          <option name="timeStamp" value="368" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="object.__getattribute__(self, name)" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

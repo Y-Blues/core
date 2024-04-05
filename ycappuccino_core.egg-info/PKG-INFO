@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: ycappuccino-core
-Version: 0.0.1
-Summary: A framewore ycappuccino_core library for declaring component based software app
-Home-page: https://github.com/Y-Blues/core
-Author: Aurelien Pisu
-Author-email: aurelie.pisu@gmail.com
-Classifier: Programming Language :: Python
-Requires-Python: >=3.9
