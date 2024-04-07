@@ -5,26 +5,24 @@ Class that allow to start the framework
 """
 from __future__ import annotations
 
-import sys
-
 import logging
 import re
 import sys, importlib
 import os
 import time
 from datetime import datetime
-from importlib.abc import MetaPathFinder, Loader
+from importlib.abc import MetaPathFinder
 from types import ModuleType
 import inspect
 
 import yaml
 
 from ycappuccino_api.core.base import YCappuccinoComponentBind, YCappuccinoComponent
-from ycappuccino_core.utils import MyLoader
+from ycappuccino_core import MyLoader
 
 sys.path.append(os.getcwd())
 # Pelix
-from pelix.framework import create_framework, BundleContext, Bundle
+from pelix.framework import create_framework, BundleContext
 from pelix.ipopo.constants import use_ipopo
 import pelix.services
 
