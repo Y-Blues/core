@@ -4,18 +4,18 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../api/.idea/api.iml" filepath="$PROJECT_DIR$/../api/.idea/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/core.iml" filepath="$PROJECT_DIR$/.idea/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../endpoints/.idea/endpoints.iml" filepath="$PROJECT_DIR$/../endpoints/.idea/endpoints.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../endpoint_crud/.idea/endpoint_crud.iml" filepath="$PROJECT_DIR$/../endpoint_crud/.idea/endpoint_crud.iml" />
       <module fileurl="file://$PROJECT_DIR$/../endpoints_service/.idea/endpoints_service.iml" filepath="$PROJECT_DIR$/../endpoints_service/.idea/endpoints_service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../endpoints_storage/.idea/endpoints_storage.iml" filepath="$PROJECT_DIR$/../endpoints_storage/.idea/endpoints_storage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../hosts/.idea/host.iml" filepath="$PROJECT_DIR$/../hosts/.idea/host.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hosts/.idea/hosts.iml" filepath="$PROJECT_DIR$/../hosts/.idea/hosts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../http/.idea/http.iml" filepath="$PROJECT_DIR$/../http/.idea/http.iml" />
       <module fileurl="file://$PROJECT_DIR$/../iot/.idea/iot.iml" filepath="$PROJECT_DIR$/../iot/.idea/iot.iml" />
       <module fileurl="file://$PROJECT_DIR$/../mongo/.idea/mongo.iml" filepath="$PROJECT_DIR$/../mongo/.idea/mongo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../permissions/.idea/permissions.iml" filepath="$PROJECT_DIR$/../permissions/.idea/permissions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../remote/.idea/remote.iml" filepath="$PROJECT_DIR$/../remote/.idea/remote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../remote_mongo/.idea/remote_mongo.iml" filepath="$PROJECT_DIR$/../remote_mongo/.idea/remote_mongo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../repositories/.idea/repositories.iml" filepath="$PROJECT_DIR$/../repositories/.idea/repositories.iml" />
       <module fileurl="file://$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" filepath="$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/../scripts/.idea/scripts.iml" filepath="$PROJECT_DIR$/../scripts/.idea/scripts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../service_comm/.idea/service_comm.iml" filepath="$PROJECT_DIR$/../service_comm/.idea/service_comm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../service_comm_storage/.idea/service_comm_storage.iml" filepath="$PROJECT_DIR$/../service_comm_storage/.idea/service_comm_storage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../storage/.idea/storage.iml" filepath="$PROJECT_DIR$/../storage/.idea/storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/../swagger/.idea/swagger.iml" filepath="$PROJECT_DIR$/../swagger/.idea/swagger.iml" />
     </modules>
   </component>
