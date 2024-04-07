@@ -1,16 +1,6 @@
-from pelix.ipopo.decorators import (
-    ComponentFactory,
-    Requires,
-    Validate,
-    Invalidate,
-    Instantiate,
-    BindField,
-    UnbindField,
-    Provides,
-)
 from ycappuccino_api.core.api import IListComponent, IActivityLogger
 from ycappuccino_api.core.base import YCappuccinoType
-from src.main.python.proxy import YCappuccinoRemote
+from src.main.python import YCappuccinoRemote
 
 list_component = None
 

@@ -5,7 +5,162 @@
   </component>
   <component name="BlackConnectSettings" triggerOnEachSave="true" triggerOnReformat="true" />
   <component name="ChangeListManager">
-    <list default="true" id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="add mecanism to don't see ipopo/pelix packages" />
+    <list default="true" id="5e9ac1ee-de35-434b-af1a-e5e2b4cbcce5" name="Changes" comment="add mecanism to don't see ipopo/pelix packages">
+      <change afterPath="$PROJECT_DIR$/.idea/mypy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/python/core/app_runner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/.idea/api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../api/.idea/api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/endpoints/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/host/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/core/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/core/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/core/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/core/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/endpoints/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/permissions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/endpoints/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/endpoints/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/host/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/proxy/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/host/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/host/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/permissions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/scheduler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/permissions/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/permissions/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/proxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/scripts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/proxy/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/proxy/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/scheduler/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/service_comm/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/scheduler/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/scheduler/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/scripts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/storage/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/scripts/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/scripts/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/service_comm/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/service_comm/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/service_comm/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/storage/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/python/storage/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/python/api/storage/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/app_runner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/bundles/activity_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/bundles/activity_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/bundles/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/bundles/configuration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/bundles/list_components.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/bundles/list_components.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/decorator_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/decorator_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/executor_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/executor_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/framework.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/models/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/models/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/models/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/models/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/python/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/python/core/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/dist/core-1.0.dev0/bundles/list_components.py" beforeDir="false" afterPath="$PROJECT_DIR$/target/dist/core-1.0.dev0/bundles/list_components.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoint_crud/.idea/endpoint_crud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoint_crud/.idea/endpoint_crud.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoint_crud/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoint_crud/src/main/python/endpoints_crud/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoint_crud/src/main/python/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoint_crud/src/main/python/endpoints_crud/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoint_crud/src/main/python/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoint_crud/src/main/python/bundles/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoint_crud/src/main/python/endpoints_crud/bundles/crud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/.idea/endpoints_service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints_service/.idea/endpoints_service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/src/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/src/main/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../endpoints_service/src/main/python/bundles/endpoint_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../endpoints_service/src/main/python/bundles/endpoint_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/.idea/hosts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/.idea/hosts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/bootstrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/bootstrap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/bundles/index_endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/bundles/index_endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/models/host.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/models/host.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/services/host.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/services/host.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/services/host_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/services/host_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/services/replace_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/services/replace_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hosts/src/main/python/services/replace_service_pyscript_index.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hosts/src/main/python/hosts/services/replace_service_pyscript_index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/.idea/http.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../http/.idea/http.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/beans.py" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/beans.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/bundles/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/bundles/endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/bundles/utils_header.py" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/bundles/utils_header.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../http/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../http/src/main/python/http/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/.idea/iot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../iot/.idea/iot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iot/src/main/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/.idea/mongo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/.idea/mongo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/src/main/python/mongo/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/src/main/python/mongo/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/src/unittest/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/src/main/python/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/src/unittest/python/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongo/src/main/python/tests/test_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mongo/src/unittest/python/test_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/.idea/permissions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/.idea/permissions.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/bootstrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/bootstrap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/bundles/jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/bundles/jwt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/media.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/media.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/organization.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/organization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/role.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/role_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/role_account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/models/role_permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/models/role_permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/services/login_services.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/services/login_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../permissions/src/main/python/services/tenant_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../permissions/src/main/python/permissions/services/tenant_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/.idea/remote.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/.idea/remote.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/src/main/python/remote/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/src/main/python/remote/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/main/python/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/main/python/bundles/remote_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/src/main/python/remote/bundles/remote_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/main/python/bundles/remote_client_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/src/main/python/remote/bundles/remote_client_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote/src/main/python/bundles/remote_component_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote/src/main/python/remote/bundles/remote_component_proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/.idea/remote_mongo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/.idea/remote_mongo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_storage_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_storage_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_storage_mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_storage_mongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../remote_mongo/src/main/python/models/remote_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/models/remote_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/.idea/repositories.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/.idea/repositories.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/example/models/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/example/models/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/item_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/item_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/manager_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/manager_upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/managers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/mongo_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/mongo_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/bundles/storage_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/bundles/storage_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repositories/src/main/python/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../repositories/src/main/python/repositories/models/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/.idea/scheduler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/bundles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/bundles/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/bundles/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/models/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/models/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/src/main/python/models/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/src/main/python/scheduler/models/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/.idea/scripts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/.idea/scripts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/src/main/python/scripts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/src/main/python/scripts/bundles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/src/main/python/bundles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/src/main/python/bundles/script_interpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/src/main/python/scripts/bundles/script_interpreter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/src/main/python/scripts/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/.idea/swagger.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/.idea/swagger.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/python/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/python/conf/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/conf/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/python/services/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/python/services/swagger.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/services/swagger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../swagger/src/main/python/services/util_swagger.py" beforeDir="false" afterPath="$PROJECT_DIR$/../swagger/src/main/python/swagger/services/util_swagger.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +174,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../storage" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../endpoint_crud" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -51,10 +206,11 @@
     "Python.test_generate_ipopo_class.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "<unknown>",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/Documents/repositories/ycappuccino/swagger",
-    "settings.editor.selected.configurable": "preferences.keymap"
+    "last_opened_file_path": "E:/Documents/repositories/ycappuccino/api/src/main/python",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable"
   }
 }]]></component>
   <component name="PyConsoleOptionsProvider">
@@ -67,18 +223,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Documents\repositories\ycappuccino\api\src\main\python" />
       <recent name="E:\Documents\repositories\ycappuccino\swagger" />
       <recent name="E:\Documents\repositories\ycappuccino\storage" />
       <recent name="E:\Documents\repositories\ycappuccino\service_comm_storage" />
       <recent name="E:\Documents\repositories\ycappuccino\service_comm" />
-      <recent name="E:\Documents\repositories\ycappuccino\scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Documents\repositories\ycappuccino\swagger\src\main\python" />
-      <recent name="E:\Documents\repositories\ycappuccino\swagger\src\unittest\python" />
-      <recent name="E:\Documents\repositories\ycappuccino\scripts\src\main\python" />
-      <recent name="E:\Documents\repositories\ycappuccino\scheduler\src\main\python" />
-      <recent name="E:\Documents\repositories\ycappuccino\repositories\src\unittest\python" />
+      <recent name="E:\Documents\repositories\ycappuccino\swagger\src\main\python\swagger" />
+      <recent name="E:\Documents\repositories\ycappuccino\scripts\src\main\python\scripts" />
+      <recent name="E:\Documents\repositories\ycappuccino\scheduler\src\main\python\scheduler" />
+      <recent name="E:\Documents\repositories\ycappuccino\repositories\src\main\python\repositories" />
+      <recent name="E:\Documents\repositories\ycappuccino\remote_mongo\src\main\python\remote_mongo" />
     </key>
   </component>
   <component name="RunManager" selected="Python.hosts">
@@ -95,7 +251,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\app_runner.py" />
+      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\core\app_runner.py" />
       <option name="PARAMETERS" value="--root_path E:\Documents\repositories\ycappuccino\hosts\example" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,7 +295,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\app_runner.py" />
+      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\core\app_runner.py" />
       <option name="PARAMETERS" value="--root_path E:\Documents\repositories\ycappuccino\storage\example" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,7 +317,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\app_runner.py" />
+      <option name="SCRIPT_NAME" value="E:\Documents\repositories\ycappuccino\core\src\main\python\core\app_runner.py" />
       <option name="PARAMETERS" value="--root_path E:\Documents\repositories\ycappuccino\swagger\example" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -296,7 +452,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712346923338</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add mecanism to don't see ipopo/pelix packages">
+      <option name="closed" value="true" />
+      <created>1712506814910</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712506814910</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -332,29 +496,24 @@
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../hosts/src/main/python/services/host_factory.py</url>
+          <url>file://$PROJECT_DIR$/../hosts/src/main/python/hosts/services/host_factory.py</url>
           <line>92</line>
           <option name="timeStamp" value="225" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_server.py</url>
+          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_server.py</url>
           <line>416</line>
           <option name="timeStamp" value="256" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_server.py</url>
+          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_server.py</url>
           <line>370</line>
           <option name="timeStamp" value="257" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/bundles/remote_server.py</url>
+          <url>file://$PROJECT_DIR$/../remote_mongo/src/main/python/remote_mongo/bundles/remote_server.py</url>
           <line>68</line>
           <option name="timeStamp" value="258" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../api/src/main/python/proxy/api.py</url>
-          <line>92</line>
-          <option name="timeStamp" value="311" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <condition expression="field == &quot;bind&quot;" language="Python" />
