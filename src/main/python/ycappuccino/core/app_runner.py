@@ -1,9 +1,13 @@
 import asyncio
 
-from ycappuccino_core import init, start
+from ycappuccino.core.fr import init, start
 import logging
 import argparse
-import  os
+import os
+
+from ycappuccino.core.framework import Framework
+
+
 # ------------------------------------------------------------------------------
 
 
@@ -18,9 +22,10 @@ def main():
     args = parser.parse_args()
     yml_path = args.config_yml_path
     root_path = args.root_path
-    init(root_path + os.sep + yml_path)
+    framework = Framework()
+    framework.init(root_path + os.sep + yml_path)
     # Run the server
-    start()
+    framework.start()
 
 if __name__ == "__main__":
     # Setup logs

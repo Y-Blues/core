@@ -2,7 +2,7 @@
 """
 decorator for app and layer that is use on component. this allow to know regarding a config what app and layer to user
 """
-from .framework import Framework
+from ycappuccino.core.framework import Framework
 class App(object):
     # Make copy of original __init__, so we can call it without recursion
     def __init__(self, name:str):

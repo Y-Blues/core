@@ -5,6 +5,7 @@ Utilities class use by core
 @author: apisu
 '''
 
+#TODO check usage of pydantic
 
 class YDict(object):
 
