@@ -17,8 +17,8 @@ import inspect
 
 import yaml
 
-from ycappuccino_api.core.base import YCappuccinoComponentBind, YCappuccinoComponent
-from ycappuccino_core import MyLoader
+from ycappuccino.api.core.base import YCappuccinoComponentBind, YCappuccinoComponent
+from ycappuccino.core.utils import MyLoader
 
 sys.path.append(os.getcwd())
 # Pelix
