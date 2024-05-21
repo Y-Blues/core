@@ -4,7 +4,7 @@ import os
 import logging
 
 import shutil
-from ycappuccino.api.core.api import IConfiguration
+from ycappuccino.api.core import IConfiguration
 
 FILE_NAME = {"key": "file_name", "default": "config.properties"}
 

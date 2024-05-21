@@ -1,4 +1,4 @@
-#app="all"
+# app="all"
 
 """
 Utilities to discover bundle and models to load regarding the configuration and app and layer decorator
@@ -15,7 +15,6 @@ bundle_loaded = []
 bundle_models_loaded_path_by_name = {}
 
 map_app_layer = {}
-
 
 
 class MyLoader(Loader):

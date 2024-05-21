@@ -1,17 +1,14 @@
-Name                         Stmts   Miss  Cover
-------------------------------------------------
-__init__.py                      0      0   100%
-app_runner.py                   17     17     0%
-bundles\__init__.py              0      0   100%
-bundles\activity_logger.py      46     46     0%
-bundles\configuration.py        79     79     0%
-bundles\list_components.py      23     23     0%
-decorator_app.py                14     14     0%
-executor_service.py             85     85     0%
-framework.py                   439    439     0%
-models\__init__.py               0      0   100%
-models\decorators.py           220    220     0%
-models\utils.py                  6      6     0%
-utils.py                        16     16     0%
-------------------------------------------------
-TOTAL                          945    945     0%
+Name                                          Stmts   Miss  Cover
+-----------------------------------------------------------------
+ycappuccino\__init__.py                           0      0   100%
+ycappuccino\core\__init__.py                      0      0   100%
+ycappuccino\core\bundles\__init__.py              0      0   100%
+ycappuccino\core\bundles\activity_logger.py      46     46     0%
+ycappuccino\core\bundles\configuration.py        79     79     0%
+ycappuccino\core\bundles\list_components.py      22     22     0%
+ycappuccino\core\decorator_app.py                13     13     0%
+ycappuccino\core\executor_service.py             85     85     0%
+ycappuccino\core\framework.py                   439    439     0%
+ycappuccino\core\utils.py                        16     16     0%
+-----------------------------------------------------------------
+TOTAL                                           700    700     0%

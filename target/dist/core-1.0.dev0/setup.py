@@ -41,11 +41,11 @@ if __name__ == '__main__':
         url = '',
         project_urls = {},
 
-        scripts = [],
+        scripts = ['scripts/runner'],
         packages = [
-            '.',
-            'bundles',
-            'models'
+            'ycappuccino',
+            'ycappuccino.core',
+            'ycappuccino.core.bundles'
         ],
         namespace_packages = [],
         py_modules = [],

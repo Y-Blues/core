@@ -8,7 +8,7 @@ component that provide a activity logger
 @author: apisu
 """
 # cohorte
-from ycappuccino.api.core.api import IActivityLogger, IConfiguration
+from ycappuccino.api.core import IActivityLogger, IConfiguration
 
 import logging
 from logging.handlers import RotatingFileHandler

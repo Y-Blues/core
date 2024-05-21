@@ -16,15 +16,15 @@ from types import ModuleType
 import inspect
 
 import yaml
+from pelix.framework import create_framework, BundleContext  # type: ignore
+from pelix.ipopo.constants import use_ipopo  # type: ignore
+import pelix.services  # type: ignore
 
-from ycappuccino_api.core.base import YCappuccinoComponentBind, YCappuccinoComponent
-from ycappuccino_core import MyLoader
+from ycappuccino.api.core_base import YCappuccinoComponent, YCappuccinoComponentBind
+from ycappuccino.core.utils import MyLoader
 
 sys.path.append(os.getcwd())
 # Pelix
-from pelix.framework import create_framework, BundleContext
-from pelix.ipopo.constants import use_ipopo
-import pelix.services
 
 import glob
 
@@ -32,9 +32,9 @@ import glob
 class MyMetaFinder(MetaPathFinder):
 
     def __init__(self, framework: Framework):
-        super(MyMetaFinder).__init__()
+        super().__init__()
         self._context = None
-        self._init_bundles = []
+        self._init_bundles: list = []
         self.framework = framework
 
     def set_context(self, a_context):
@@ -113,11 +113,11 @@ class Framework:
         self.application_yaml = {}
         self.map_layer_class = {}
         self.map_app_class = {}
-        self.bundle_loaded: list[str] = []
+        self.bundle_loaded: list[str] = []  # type: ignore
         self.ipopo = None
         self._finder = MyMetaFinder(self)
-        self.bundle_models_loaded_path_by_name: dict = dict()
-        sys.meta_path.insert(0, self._finder)
+        self.bundle_models_loaded_path_by_name: dict = dict()  # type: ignore
+        sys.meta_path.insert(0, self._finder)  # type: ignore
 
     @classmethod
     def get_framework(cls):
@@ -137,7 +137,7 @@ class Framework:
 
     def is_http_server(self) -> bool:
         """return app paramaeter regarding yaml"""
-        active = None
+        active = False
         if "config" in self.application_yaml.keys():
             if "http_server" in self.application_yaml["config"].keys():
                 if "active" in self.application_yaml["config"]["http_server"].keys():
@@ -325,13 +325,13 @@ class Framework:
     def get_requires_from_ycappuccino_component(
         self, component: type
     ) -> dict[str, list[list]]:
-        sign = inspect.signature(component.__init__)
+        sign = inspect.signature(component.__init__)  # type: ignore
         binds: list[list] = []
         requires: list[list] = []
 
         if self.is_ycappuccino_component_bind(component):
             # manage type of bind to generate bind method
-            sign_bind = inspect.signature(component.bind)
+            sign_bind = inspect.signature(component.bind)  # type: ignore
             for key, item in sign_bind.parameters.items():
                 if key != "self":
                     if item.annotation.__name__ == "_UnionGenericAlias":
@@ -357,7 +357,7 @@ class Framework:
         properties: list[list] = []
         all: list[list] = []
         for key, item in sign.parameters.items():
-            if item.default is not inspect._empty:
+            if item.default is not inspect._empty:  # type: ignore
                 elem = [key, item.annotation.__name__, item.default, False]
                 properties.append(elem)
                 all.append(elem)
@@ -565,26 +565,26 @@ class Framework:
                     [
                         comp.__name__
                         for comp in list_ycappuccino_component
-                        if comp.__name__ not in props.get("requires_spec")
-                        and comp.__name__ not in props.get("binds_spec")
+                        if comp.__name__ not in props.get("requires_spec")  # type: ignore
+                        and comp.__name__ not in props.get("binds_spec")  # type: ignore
                     ]
                 )
                 parameters: list[str] = []
-                args_new: list[str] = self.get_arg_new(props.get("all"))
+                args_new: list[str] = self.get_arg_new(props.get("all"))  # type: ignore
                 properties: list[str] = self.get_dumps(
                     kind="Property",
                     parameter_dump=parameters,
-                    dec_tuple=props.get("properties"),
+                    dec_tuple=props.get("properties"),  # type: ignore
                 )
                 requires: list[str] = self.get_dumps(
                     kind="Requires",
                     parameter_dump=parameters,
-                    dec_tuple=props.get("requires"),
+                    dec_tuple=props.get("requires"),  # type: ignore
                 )
                 bind_methods: list[str] = self.get_bind_dumps(
                     kind="BindField",
                     parameter_dump=parameters,
-                    dec_tuple=props.get("binds"),
+                    dec_tuple=props.get("binds"),  # type: ignore
                 )
                 bind_methods_dump: str = "\n".join(bind_methods)
                 requires_dump: str = "\n".join(requires)

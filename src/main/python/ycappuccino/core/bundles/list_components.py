@@ -1,6 +1,6 @@
-from ycappuccino.api.core.api import IListComponent, IActivityLogger
-from ycappuccino.api.core.base import YCappuccinoType
-from ycappuccino.api.proxy.api import YCappuccinoRemote
+from ycappuccino.api.core import IListComponent, IActivityLogger
+from ycappuccino.api.core_base import YCappuccinoType
+from ycappuccino.api.proxy import YCappuccinoRemote
 
 list_component = None
 
