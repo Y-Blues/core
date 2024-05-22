@@ -181,7 +181,7 @@ class Framework:
         bundle_prefix = None
         if "bundle_prefix" in self.application_yaml.keys():
             bundle_prefix = self.application_yaml["bundle_prefix"]
-        return bundle_prefix
+        return [bundle_prefix]
 
     def get_model_app(self):
         """return app paramaeter regarding yaml"""
@@ -224,8 +224,8 @@ class Framework:
 
     def get_layer_path(self, a_layer):
         """get the file path of the directory of the layer"""
-        w_module = importlib.import_module(a_layer)
-        return os.sep.join(w_module.__path__[0].split(os.sep)[0:-1])
+        w_module = importlib.import_module(a_layer.replace("-", "."))
+        return os.sep.join(w_module.__path__[0].split(os.sep)[0:-2])
 
     def init(self, yml_path):
         """ """
@@ -249,9 +249,9 @@ class Framework:
                 # EventAdmin,
                 "pelix.services.eventadmin",
                 "pelix.shell.eventadmin",
-                "ycappuccino_api.core.api",
-                "ycappuccino_core.bundles.configuration",
-                "ycappuccino_core.bundles.activity_logger",
+                "ycappuccino.api.core",
+                "ycappuccino.core.bundles.configuration",
+                "ycappuccino.core.bundles.activity_logger",
             )
         )
 
@@ -778,7 +778,9 @@ class {factory}Ipopo(Proxy):
                         w_file + "/__init__.py"
                     ):
                         if a_module_name == "":
-                            w_module_name = w_file.split("/")[-1]
+                            w_module_name = (
+                                w_file.split("/")[-2] + "." + w_file.split("/")[-1]
+                            )
 
                         else:
                             w_module_name = a_module_name + "." + w_file.split("/")[-1]
@@ -789,7 +791,8 @@ class {factory}Ipopo(Proxy):
                             w_model = self.load_bundle(w_file, w_module_name, a_context)
                             if w_model is not None:
                                 w_list_model.append(w_model)
-
+                    else:
+                        self.find_and_install_bundle(w_file, a_module_name, a_context)
             # load models at the end of all component
             for w_model in w_list_model:
                 a_context.install_bundle(w_model)
