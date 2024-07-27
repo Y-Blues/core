@@ -6,6 +6,7 @@ use_plugin("python.unittest")
 use_plugin("python.flake8")
 use_plugin("python.coverage")
 use_plugin("python.distutils")
+use_plugin("python.install_dependencies")
 
 
 name = "core"
@@ -14,4 +15,5 @@ default_task = "publish"
 
 @init
 def set_properties(project):
-    pass
+    project.set_property("core", False)  # default is True
+    project.build_depends_on("pyyaml")

@@ -41,9 +41,8 @@ if __name__ == '__main__':
         url = '',
         project_urls = {},
 
-        scripts = ['scripts/runner'],
+        scripts = [],
         packages = [
-            'ycappuccino',
             'ycappuccino.core',
             'ycappuccino.core.bundles'
         ],
