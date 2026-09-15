@@ -16,10 +16,12 @@ it implements.
 
 import dataclasses
 import inspect
+import logging
 import types
 import typing
 from types import ModuleType
 from typing import Any, Optional
+from urllib.parse import parse_qsl, urlsplit
 
 import pelix.http as http
 import pelix.remote
@@ -214,7 +216,6 @@ def create_factory_module(
 
     if issubclass(component, IHttpServlet):
         def _http_request(pelix_request, method: str) -> "HttpRequest":
-            from urllib.parse import parse_qsl, urlsplit
             full_path = pelix_request.get_path()
             query = dict(parse_qsl(urlsplit(full_path).query))
             return HttpRequest(
@@ -238,7 +239,6 @@ def create_factory_module(
                 try:
                     result = runner.run(self._obj.handle(request))
                 except Exception:
-                    import logging
                     logging.getLogger(component.__module__).exception("servlet %s failed on %s", component.__qualname__, request.path)
                     result = HttpResponse(status=500, body=b"", content_type="text/plain")
                 _send(pelix_response, result)

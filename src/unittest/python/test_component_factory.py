@@ -14,7 +14,13 @@ from ycappuccino.api.core_base import (
 )
 from ycappuccino.api.hosts import IHost
 from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
-from ycappuccino.core.component_factory import Requirement, describe_component, is_component
+from ycappuccino.core.async_runner import AsyncRunner
+from ycappuccino.core.component_factory import (
+    Requirement,
+    create_factory_module,
+    describe_component,
+    is_component,
+)
 
 
 class IGreeter(YCappuccinoComponent, ABC):
@@ -216,6 +222,26 @@ class TestDescribeComponent(unittest.TestCase):
     def test_http_servlet_without_a_path_parameter_is_rejected(self):
         with self.assertRaises(TypeError):
             describe_component(ServletWithoutPath)
+
+
+class TestCreateFactoryModule(unittest.TestCase):
+
+    def setUp(self):
+        self.runner = AsyncRunner()
+        self.addCleanup(self.runner.shutdown)
+
+    def test_non_servlet_components_do_not_have_getattribute_override(self):
+        # Tripwire: non-servlet components should not get a __getattribute__ override
+        # in their generated proxy class
+        description = describe_component(Greeter)
+        module = create_factory_module(description, self.runner, {})
+
+        # Get the proxy class from the generated module
+        proxy_class = getattr(module, "GreeterIpopoProxy")
+
+        # Check that __getattribute__ is NOT in the proxy class's own namespace
+        # (it may be inherited from Proxy, but not overridden)
+        self.assertNotIn("__getattribute__", proxy_class.__dict__)
 
 
 if __name__ == "__main__":
