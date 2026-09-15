@@ -12,8 +12,8 @@ from ycappuccino.api.core_base import (
     YCappuccinoComponentBind,
     YCappuccinoType,
 )
-from ycappuccino.api.hosts import IHost
 from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
+from ycappuccino.api.proxy import YCappuccinoRemote
 from ycappuccino.core.async_runner import AsyncRunner
 from ycappuccino.core.component_factory import (
     Requirement,
@@ -21,6 +21,10 @@ from ycappuccino.core.component_factory import (
     describe_component,
     is_component,
 )
+
+
+class IHost(YCappuccinoRemote):
+    """legacy-style interface: injectable because it derives from YCappuccinoRemote"""
 
 
 class IGreeter(YCappuccinoComponent, ABC):
