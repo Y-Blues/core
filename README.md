@@ -201,6 +201,8 @@ Framework.get_framework().destroy_component(handle)
 - `destroy_component(handle)` arrête (`stop()`) puis désinstalle l'instance ; appeler `destroy_component` une seconde fois sur le même handle ne fait rien.
 - Le framework doit être démarré (`init()` déjà appelé) ; sinon `RuntimeError`.
 
+**Piège : ne jamais appeler `instantiate_component`/`destroy_component` de façon synchrone depuis le `start()`/`stop()` d'un composant tant que celui-ci est encore en cours de validation/invalidation.** L'installation d'un bundle Pelix instancie et valide son composant sous un verrou global tenu pendant toute la validation, laquelle s'exécute (via `AsyncRunner`) sur un thread dédié différent de celui qui a démarré le bundle ; un appel imbriqué à `instantiate_component`/`destroy_component` depuis cette validation redemande ce même verrou, encore détenu par l'appel englobant — interblocage permanent, sans exception. Un composant qui doit réagir à un événement (`ITrigger`, service lié plus tard...) n'est pas concerné, seul un appel **synchrone depuis son propre `start()`/`stop()`** l'est ; s'il doit le faire au démarrage, qu'il le fasse dans un thread séparé qu'il ne bloque pas sur le résultat (voir `ycappuccino-component-creator`, `ComponentActivator.start()`, pour un exemple traité).
+
 Ce mécanisme est le même que celui utilisé par `load_bundles()` pour les composants découverts au scan (`describe_component`, `create_factory_module`) ; il n'est pas lié à un modèle de données particulier — n'importe quel sous-projet peut l'utiliser pour piloter des instances de composants depuis ses propres données.
 
 ## Servlets HTTP
