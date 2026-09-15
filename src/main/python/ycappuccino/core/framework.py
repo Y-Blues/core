@@ -21,18 +21,21 @@ dependencies of its layer in conf/config*.yaml::
       ycappuccino_core: true
 """
 
+import dataclasses
 import fnmatch
 import glob
 import importlib
 import inspect
+import itertools
 import logging
 import os
 import pkgutil
 import sys
+from typing import Optional, Union
 
 import pelix.services  # type: ignore
 import yaml
-from pelix.framework import FrameworkFactory, create_framework  # type: ignore
+from pelix.framework import Bundle, FrameworkFactory, create_framework  # type: ignore
 from pelix.http import FACTORY_HTTP_BASIC, HTTP_SERVICE_ADDRESS, HTTP_SERVICE_PORT  # type: ignore
 from pelix.ipopo.constants import IPopoEvent, use_ipopo  # type: ignore
 
@@ -44,6 +47,7 @@ from ycappuccino.core.component_factory import (
     describe_component,
     is_component,
     is_ipopo_component,
+    resolve_class,
 )
 
 _logger = logging.getLogger(__name__)
@@ -60,6 +64,14 @@ _PELIX_BUNDLES = (
 )
 
 DEFAULT_HTTP_PORT = 8080
+
+
+@dataclasses.dataclass(frozen=True)
+class ComponentHandle:
+    """returned by Framework.instantiate_component, to pass to destroy_component"""
+
+    bundle: Bundle
+    module_name: str
 
 
 class ListenerFactories:
@@ -115,6 +127,7 @@ class Framework:
         # layer -> layers it depends on, read from the conf/config*.yaml of the scanned packages
         self._layer_dependencies = {}
         self._async_runner = AsyncRunner()
+        self._component_sequence = itertools.count(1)
 
     @classmethod
     def get_framework(cls):
@@ -365,6 +378,44 @@ class Framework:
         properties = dict(components.get(description.component.__name__) or {})
         properties.update(components.get(description.name) or {})
         return properties
+
+    # ------------------------------------------------------------------ runtime components
+
+    def instantiate_component(
+        self, component: Union[type, str], properties: Optional[dict] = None
+    ) -> ComponentHandle:
+        """
+        Install and start one native component instance outside of load_bundles()'s one-time
+        startup scan. `component` is a concrete YCappuccinoComponent subclass, or a dotted
+        "module.ClassName" path to one; `properties` overrides its constructor properties,
+        exactly like `components: <name>: {...}` in application.yml. Returns a handle to give
+        to destroy_component() to stop and uninstall it later. The framework must be started
+        (init()) first; every call creates an independent instance, even for the same class.
+        """
+        if self.context is None:
+            raise RuntimeError("instantiate_component requires a started framework")
+        klass = resolve_class(component) if isinstance(component, str) else component
+        if not is_component(klass):
+            raise TypeError(f"{klass!r} is not a native YCappuccino component")
+
+        description = describe_component(klass)
+        name = f"{description.name}#{next(self._component_sequence)}"
+        module = create_factory_module(description, self._async_runner, properties, name=name)
+        sys.modules[module.__name__] = module
+        bundle = self.context.install_bundle(module.__name__)
+        try:
+            bundle.start()
+        except Exception:
+            sys.modules.pop(module.__name__, None)
+            raise
+        return ComponentHandle(bundle, module.__name__)
+
+    def destroy_component(self, handle: ComponentHandle) -> None:
+        """stop and uninstall a component created by instantiate_component; a no-op if it was
+        already destroyed"""
+        if handle.bundle.get_state() != Bundle.UNINSTALLED:
+            handle.bundle.uninstall()
+        sys.modules.pop(handle.module_name, None)
 
 
 def _is_test_module(module_name) -> bool:

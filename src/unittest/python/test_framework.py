@@ -265,6 +265,55 @@ class TestFrameworkApplication(unittest.TestCase):
         self.assertIs(Framework.get_framework(), self.framework)
         self.assertIs(Framework.get_instance(), self.framework)
 
+    def test_instantiate_component_publishes_a_new_service(self):
+        handle = self.framework.instantiate_component(self.services.Greeter, {"prefix": "Yo"})
+        self.addCleanup(self.framework.destroy_component, handle)
+
+        greeter = self.get_service("IGreeter", "(prefix=Yo)")
+
+        self.assertEqual(greeter.greet("there"), "Yo there")
+
+    def test_instantiate_component_accepts_a_dotted_path(self):
+        handle = self.framework.instantiate_component(
+            self.app.package + ".services.Greeter", {"prefix": "Salut"}
+        )
+        self.addCleanup(self.framework.destroy_component, handle)
+
+        greeter = self.get_service("IGreeter", "(prefix=Salut)")
+
+        self.assertEqual(greeter.greet("there"), "Salut there")
+
+    def test_instantiate_component_twice_creates_independent_instances(self):
+        first = self.framework.instantiate_component(self.services.Greeter, {"prefix": "A"})
+        self.addCleanup(self.framework.destroy_component, first)
+        second = self.framework.instantiate_component(self.services.Greeter, {"prefix": "B"})
+        self.addCleanup(self.framework.destroy_component, second)
+
+        self.assertEqual(self.get_service("IGreeter", "(prefix=A)").greet("x"), "A x")
+        self.assertEqual(self.get_service("IGreeter", "(prefix=B)").greet("x"), "B x")
+
+    def test_destroy_component_stops_and_unpublishes_it(self):
+        handle = self.framework.instantiate_component(self.services.Greeter, {"prefix": "Bye"})
+        self.assertIsNotNone(self.context.get_service_reference("IGreeter", "(prefix=Bye)"))
+
+        self.framework.destroy_component(handle)
+
+        self.assertIsNone(self.context.get_service_reference("IGreeter", "(prefix=Bye)"))
+
+    def test_destroy_component_is_idempotent(self):
+        handle = self.framework.instantiate_component(self.services.Greeter, {"prefix": "Once"})
+
+        self.framework.destroy_component(handle)
+        self.framework.destroy_component(handle)  # must not raise
+
+    def test_instantiate_component_rejects_a_non_component_class(self):
+        with self.assertRaises(TypeError):
+            self.framework.instantiate_component(object)
+
+    def test_instantiate_component_rejects_an_unresolvable_dotted_path(self):
+        with self.assertRaises(ImportError):
+            self.framework.instantiate_component("no.such.module.NoSuchClass")
+
 
 class TestFrameworkStartAndStop(unittest.TestCase):
 
@@ -302,6 +351,10 @@ class TestFrameworkStartAndStop(unittest.TestCase):
         self.assertIn("consumer.stop", services.EVENTS)
         self.assertIn("greeter.stop", services.EVENTS)
         self.assertIsNot(Framework.get_framework(), framework)
+
+    def test_instantiate_component_requires_a_started_framework(self):
+        with self.assertRaises(RuntimeError):
+            Framework().instantiate_component(object)
 
 
 class FakePelixFramework(object):

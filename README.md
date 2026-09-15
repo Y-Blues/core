@@ -185,6 +185,24 @@ dependencies_layer:
 | `ActivityLogger` | `IActivityLogger`, propriété `name=main` | logger fichier `data/log/Log-Activity-main.log`, réglable par `activity.logger.main.file`, `.level`, `.format`, `.nb`, `.size` dans `config.properties` |
 | `ListComponent` | `IListComponent` | recense les services `YCappuccinoRemote` ; `call(id, méthode)` |
 
+## Installer un composant à l'exécution
+
+`load_bundles()` scanne `bundle_prefix` une seule fois, au démarrage. Un code qui doit créer une instance de composant native plus tard — par exemple à partir d'une donnée stockée, découverte après coup — utilise directement `Framework.get_framework()` :
+
+```python
+handle = Framework.get_framework().instantiate_component(Greeter, {"greeting": "Salut"})
+...
+Framework.get_framework().destroy_component(handle)
+```
+
+- `component` est une classe de composant native (comme dans `bundle_prefix`), ou une chaîne `"module.Classe"` résolue par import ; `TypeError` si la classe n'est pas un composant natif valide (voir « Écrire un composant »), `ImportError` si le chemin ne se résout pas.
+- `properties` surcharge les propriétés du constructeur, exactement comme `components: <nom>: {...}` dans `application.yml`.
+- Chaque appel crée une instance **indépendante**, y compris pour la même classe appelée plusieurs fois : elle est publiée sous son nom qualifié suivi d'un compteur (`module.Classe#1`, `module.Classe#2`, ...), visible dans la console Pelix.
+- `destroy_component(handle)` arrête (`stop()`) puis désinstalle l'instance ; appeler `destroy_component` une seconde fois sur le même handle ne fait rien.
+- Le framework doit être démarré (`init()` déjà appelé) ; sinon `RuntimeError`.
+
+Ce mécanisme est le même que celui utilisé par `load_bundles()` pour les composants découverts au scan (`describe_component`, `create_factory_module`) ; il n'est pas lié à un modèle de données particulier — n'importe quel sous-projet peut l'utiliser pour piloter des instances de composants depuis ses propres données.
+
 ## Servlets HTTP
 
 Un composant qui implémente `IHttpServlet` (`ycappuccino.api.http`) devient une servlet Pelix, sans aucun décorateur :

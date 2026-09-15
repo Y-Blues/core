@@ -15,6 +15,7 @@ it implements.
 """
 
 import dataclasses
+import importlib
 import inspect
 import logging
 import types
@@ -84,6 +85,18 @@ class ComponentDescription:
         return self.name + "-Factory"
 
 
+def resolve_class(dotted_path: str) -> type:
+    """the class designated by a "module.ClassName" dotted path"""
+    module_name, separator, class_name = dotted_path.rpartition(".")
+    if not separator:
+        raise ValueError(f"{dotted_path!r} is not a dotted 'module.ClassName' path")
+    module = importlib.import_module(module_name)
+    try:
+        return getattr(module, class_name)
+    except AttributeError:
+        raise ImportError(f"module {module_name!r} has no class {class_name!r}") from None
+
+
 def is_ipopo_component(klass: Any) -> bool:
     """true for classes already manipulated by the iPOPO decorators (legacy bundles)"""
     context = getattr(klass, IPOPO_FACTORY_CONTEXT, None)
@@ -138,14 +151,22 @@ def describe_component(klass: type) -> ComponentDescription:
 
 
 def create_factory_module(
-    description: ComponentDescription, runner, instance_properties: Optional[dict] = None
+    description: ComponentDescription,
+    runner,
+    instance_properties: Optional[dict] = None,
+    name: Optional[str] = None,
 ) -> ModuleType:
     """
     build a module holding the iPOPO factory of the component, to install as a Pelix bundle.
     The factory is instantiated once and publishes a Proxy to the component object.
+
+    `name` overrides the module/instance/factory identifier (default: description.name). Pass a
+    unique name to turn the same class into several independent runtime instances, as
+    Framework.instantiate_component does.
     """
     component = description.component
-    module = ModuleType(description.name + "_ipopo")
+    instance_name = name or description.name
+    module = ModuleType(instance_name + "_ipopo")
     list_fields = {
         _require_field(requirement.field) for requirement in description.requires if requirement.aggregate
     }
@@ -284,8 +305,8 @@ def create_factory_module(
         )(factory_class)
 
     factory_class = Provides(description.provides)(factory_class)
-    factory_class = Instantiate(description.name, dict(instance_properties or {}))(factory_class)
-    factory_class = ComponentFactory(description.factory_name)(factory_class)
+    factory_class = Instantiate(instance_name, dict(instance_properties or {}))(factory_class)
+    factory_class = ComponentFactory(instance_name + "-Factory")(factory_class)
 
     setattr(module, factory_class.__name__, factory_class)
     return module

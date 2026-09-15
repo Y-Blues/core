@@ -4,6 +4,7 @@ from abc import ABC
 
 import support  # noqa: F401
 
+from pelix.ipopo.constants import IPOPO_FACTORY_CONTEXT
 from pelix.ipopo.decorators import ComponentFactory, Instantiate
 
 from ycappuccino.api.core import IActivityLogger, IConfiguration
@@ -20,6 +21,7 @@ from ycappuccino.core.component_factory import (
     create_factory_module,
     describe_component,
     is_component,
+    resolve_class,
 )
 
 
@@ -246,6 +248,40 @@ class TestCreateFactoryModule(unittest.TestCase):
         # Check that __getattribute__ is NOT in the proxy class's own namespace
         # (it may be inherited from Proxy, but not overridden)
         self.assertNotIn("__getattribute__", proxy_class.__dict__)
+
+    def test_name_overrides_module_and_factory_identifiers(self):
+        description = describe_component(Greeter)
+
+        module = create_factory_module(description, self.runner, {}, name="custom-name")
+
+        self.assertEqual(module.__name__, "custom-name_ipopo")
+        proxy_class = getattr(module, "GreeterIpopoProxy")
+        self.assertEqual(getattr(proxy_class, IPOPO_FACTORY_CONTEXT).name, "custom-name-Factory")
+
+    def test_default_name_is_still_description_name(self):
+        description = describe_component(Greeter)
+
+        module = create_factory_module(description, self.runner, {})
+
+        self.assertEqual(module.__name__, description.name + "_ipopo")
+
+
+class TestResolveClass(unittest.TestCase):
+
+    def test_resolves_a_dotted_path_to_its_class(self):
+        self.assertIs(resolve_class(__name__ + ".Greeter"), Greeter)
+
+    def test_rejects_a_path_without_a_module(self):
+        with self.assertRaises(ValueError):
+            resolve_class("Greeter")
+
+    def test_unknown_module_raises_import_error(self):
+        with self.assertRaises(ImportError):
+            resolve_class("no.such.module.Greeter")
+
+    def test_unknown_class_raises_import_error(self):
+        with self.assertRaises(ImportError):
+            resolve_class(__name__ + ".NoSuchClass")
 
 
 if __name__ == "__main__":
