@@ -1,26 +1,28 @@
 """
-decorator for app and layer that is use on component. this allow to know regarding a config what app and layer to user
+decorator for app and layer that is use on component. the framework only loads a class of a layer
+when this layer is active regarding application.yml
 """
 
-from ycappuccino.core.framework import Framework
+from ycappuccino.core import utils
 
 
 class App(object):
-    # Make copy of original __init__, so we can call it without recursion
-    def __init__(self, name: str):
 
+    def __init__(self, name: str):
         self.name = name
 
     def __call__(self, obj):
-        Framework.get_framework().add_app(obj.__name__, self.name)
+        setattr(obj, utils.APP_ATTRIBUTE, self.name)
+        utils.map_app_class[obj.__name__] = self.name
         return obj
 
 
 class Layer(object):
-    # Make copy of original __init__, so we can call it without recursion
-    def __init__(self, name):
+
+    def __init__(self, name: str):
         self.name = name
 
     def __call__(self, obj):
-        Framework.get_framework().add_layer(obj.__name__, self.name)
+        setattr(obj, utils.LAYER_ATTRIBUTE, self.name)
+        utils.map_layer_class[obj.__name__] = self.name
         return obj

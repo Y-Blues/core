@@ -1,0 +1,11 @@
+---
+name: demo
+# packages scanned for components, legacy bundles and models
+bundle_prefix: demo
+# properties of the components, by class name
+components:
+  Greeter:
+    greeting: Bonjour
+config:
+  http_server:
+    active: false

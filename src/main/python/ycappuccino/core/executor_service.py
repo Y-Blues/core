@@ -14,10 +14,7 @@ class Callable(object):
 
     def __init__(self, a_name, a_log=None):
         self._name = a_name
-        if a_log is None:
-            self._log = a_log
-        else:
-            self._log = logger
+        self._log = a_log if a_log is not None else logger
 
     def run(self):
         """main loop for the thread that call the run"""
@@ -30,7 +27,6 @@ class RunnableProcess(Callable):
         super(RunnableProcess, self).__init__(a_name, a_log)
         self._activate = False
         self._semaphore = Semaphore()
-        self._name = a_name
 
     def process(self):
         """abstract run class"""
@@ -93,7 +89,7 @@ def new_executor(name, a_max_worker=1):
 
 
 class ScheduleRunnable(RunnableProcess):
-    def __init__(self, a_executor, a_timer, a_log):
+    def __init__(self, a_executor, a_timer, a_log=None):
         super(ScheduleRunnable, self).__init__("ScheduleRunnable", a_log)
         self._timer = a_timer
         self._executor = a_executor
@@ -116,6 +112,7 @@ class SchedulerExecutorCallable(object):
     def submit(self, a_runnable):
         self._runnable.append(a_runnable)
         if self._future is None:
+            self._runnable_main.set_activate(True)
             self._future = self._executor.submit(_run, self._runnable_main)
         return self._future
 
@@ -123,6 +120,7 @@ class SchedulerExecutorCallable(object):
         return self._runnable
 
     def shutdown(self):
+        self._runnable_main.set_activate(False)
         self._executor.shutdown()
 
 

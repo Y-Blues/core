@@ -1,33 +1,17 @@
-# app="all"
-
 """
-Utilities to discover bundle and models to load regarding the configuration and app and layer decorator
+Registries shared by the framework and the @App / @Layer decorators.
+
+This module has no dependency, so that decorators and models can be imported outside
+of the framework (e.g. by the pyscript client).
 """
 
+# attributes set on the classes decorated with @Layer / @App
+LAYER_ATTRIBUTE = "__ycappuccino_layer__"
+APP_ATTRIBUTE = "__ycappuccino_app__"
 
-from importlib.abc import Loader
-import logging
+# class name -> layer / app name
+map_layer_class = {}
+map_app_class = {}
 
-_logger = logging.getLogger(__name__)
-
-bundle_loaded = []
-
+# module name -> file path of the modules declaring @Item models
 bundle_models_loaded_path_by_name = {}
-
-map_app_layer = {}
-
-
-class MyLoader(Loader):
-    def __init__(self, filename):
-        self.filename = filename
-
-    def create_module(self, spec):
-        return None  # use default module creation semantics
-
-    def exec_module(self, module):
-        with open(self.filename) as f:
-            data = f.read()
-
-        # manipulate data some way...
-
-        exec(data, vars(module))
