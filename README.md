@@ -161,18 +161,15 @@ config:
 
 ### Couches
 
-Une classe décorée par `@Layer` n'est chargée que si sa couche est active :
+Une classe n'est chargée que si sa couche est active. Une classe de composant natif (sans décorateur) déclare directement l'attribut `__ycappuccino_layer__` :
 
 ```python
-from ycappuccino.core.decorator_app import Layer
-
-
-@Layer(name="myapp_admin")
 class AdminService(YCappuccinoComponent):
+    __ycappuccino_layer__ = "myapp_admin"
     ...
 ```
 
-Une classe sans `@Layer` est toujours chargée. Un package peut déclarer les couches dont dépend la sienne dans `conf/config.yaml`, à côté de son `__init__.py` :
+Le décorateur `@Layer(name=...)` fait la même chose et reste utile pour les bundles iPOPO legacy, qui ne peuvent pas porter l'attribut directement dans leur définition de classe sans le décorateur. Une classe sans couche est toujours chargée. Un package peut déclarer les couches dont dépend la sienne dans `conf/config.yaml`, à côté de son `__init__.py` :
 
 ```yaml
 layer: myapp_admin             # défaut : nom du package avec "." remplacé par "_"
@@ -187,6 +184,31 @@ dependencies_layer:
 | `Configuration` | `IConfiguration` | lit et écrit `conf/config.properties` dans le répertoire courant : `get(key, default)`, `set`, `has` ; `true`/`false` sont convertis en booléens |
 | `ActivityLogger` | `IActivityLogger`, propriété `name=main` | logger fichier `data/log/Log-Activity-main.log`, réglable par `activity.logger.main.file`, `.level`, `.format`, `.nb`, `.size` dans `config.properties` |
 | `ListComponent` | `IListComponent` | recense les services `YCappuccinoRemote` ; `call(id, méthode)` |
+
+## Servlets HTTP
+
+Un composant qui implémente `IHttpServlet` (`ycappuccino.api.http`) devient une servlet Pelix, sans aucun décorateur :
+
+```python
+from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
+
+
+class Echo(IHttpServlet):
+
+    def __init__(self, path: str = "/echo"):
+        self._path = path
+
+    async def handle(self, request: HttpRequest) -> HttpResponse:
+        return HttpResponse(status=200, body=b"{}", content_type="application/json")
+
+    async def start(self):
+        pass
+
+    async def stop(self):
+        pass
+```
+
+`path` est une propriété ordinaire (surchargeable dans `application.yml`, `components: Echo: {path: /autre}`) : le framework l'expose aussi comme le chemin de la servlet Pelix. `handle` est appelée depuis le thread HTTP de Pelix, via le même pont synchrone que `start`/`stop` ; une exception qu'elle laisse s'échapper devient une réponse `500`. Cela suppose `config.http_server.active: true` dans `application.yml`.
 
 ## Lancer une application
 
