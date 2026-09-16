@@ -1,3 +1,4 @@
+import inspect
 import logging
 import os
 import sys
@@ -10,6 +11,7 @@ from pelix.framework import Bundle
 from pelix.ipopo.constants import use_ipopo
 
 from ycappuccino.core import utils
+from ycappuccino.core.component_factory import resolve_class
 from ycappuccino.core.framework import Framework
 
 APPLICATION = {
@@ -314,6 +316,36 @@ class TestFrameworkApplication(unittest.TestCase):
         with self.assertRaises(ImportError):
             self.framework.instantiate_component("no.such.module.NoSuchClass")
 
+    def test_native_component_from_bundle_prefix_scan_is_listed(self):
+        components = self.framework.list_components()
+        by_class = {component["class"]: component for component in components}
+
+        self.assertIn("Greeter", by_class)
+        greeter = by_class["Greeter"]
+        self.assertEqual(greeter["module"], self.services.__name__)
+        self.assertIn(self.services.__name__ + ".IGreeter", greeter["provides"])
+        self.assertIn(self.services.__name__ + ".Greeter", greeter["provides"])
+        for qualified_path in greeter["provides"]:
+            self.assertTrue(inspect.isclass(resolve_class(qualified_path)))
+
+    def test_legacy_ipopo_bundle_is_not_listed(self):
+        classes = {component["class"] for component in self.framework.list_components()}
+
+        self.assertNotIn("LegacyOn", classes)
+
+    def test_instantiate_component_adds_and_destroy_component_removes_the_listing(self):
+        before = len(self.framework.list_components())
+
+        handle = self.framework.instantiate_component(self.services.Greeter, {"prefix": "Listed"})
+        components = self.framework.list_components()
+        self.assertEqual(len(components), before + 1)
+        listed = [component for component in components if component["module"] == self.services.__name__ and component["class"] == "Greeter"]
+        self.assertTrue(any(self.services.__name__ + ".IGreeter" in component["provides"] for component in listed))
+
+        self.framework.destroy_component(handle)
+
+        self.assertEqual(len(self.framework.list_components()), before)
+
 
 class TestFrameworkStartAndStop(unittest.TestCase):
 
@@ -351,6 +383,17 @@ class TestFrameworkStartAndStop(unittest.TestCase):
         self.assertIn("consumer.stop", services.EVENTS)
         self.assertIn("greeter.stop", services.EVENTS)
         self.assertIsNot(Framework.get_framework(), framework)
+
+    def test_stop_clears_the_component_listing(self):
+        app = TemporaryApplication(APPLICATION).open()
+        self.addCleanup(app.close)
+        framework = Framework()
+        framework.init(app.yml_path)
+        self.assertNotEqual(framework.list_components(), [])
+
+        framework.stop()
+
+        self.assertEqual(framework.list_components(), [])
 
     def test_instantiate_component_requires_a_started_framework(self):
         with self.assertRaises(RuntimeError):

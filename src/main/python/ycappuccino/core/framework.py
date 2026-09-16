@@ -43,6 +43,7 @@ from ycappuccino.api import decorators as model_decorators
 from ycappuccino.core import utils
 from ycappuccino.core.async_runner import AsyncRunner
 from ycappuccino.core.component_factory import (
+    ComponentDescription,
     create_factory_module,
     describe_component,
     is_component,
@@ -72,6 +73,7 @@ class ComponentHandle:
 
     bundle: Bundle
     module_name: str
+    component_name: str
 
 
 class ListenerFactories:
@@ -128,6 +130,11 @@ class Framework:
         self._layer_dependencies = {}
         self._async_runner = AsyncRunner()
         self._component_sequence = itertools.count(1)
+        # native components currently installed, by their unique instance name (the same
+        # identity used to name their Pelix instance/factory: "module.Class" for a component
+        # found by load_bundles()'s bundle_prefix scan, "module.Class#N" for one created at
+        # runtime by instantiate_component) - see list_components()
+        self._components: dict[str, ComponentDescription] = {}
 
     @classmethod
     def get_framework(cls):
@@ -268,6 +275,7 @@ class Framework:
             self.ipopo = None
             self.context = None
         self._async_runner.shutdown()
+        self._components.clear()
         if Framework._singleton is self:
             Framework._singleton = None
 
@@ -371,6 +379,7 @@ class Framework:
         )
         sys.modules[module.__name__] = module
         self.context.install_bundle(module.__name__).start()
+        self._components[description.name] = description
 
     def _component_properties(self, description) -> dict:
         """properties of a component set in application.yml, by class name or qualified name"""
@@ -408,7 +417,8 @@ class Framework:
         except Exception:
             sys.modules.pop(module.__name__, None)
             raise
-        return ComponentHandle(bundle, module.__name__)
+        self._components[name] = description
+        return ComponentHandle(bundle, module.__name__, name)
 
     def destroy_component(self, handle: ComponentHandle) -> None:
         """stop and uninstall a component created by instantiate_component; a no-op if it was
@@ -416,6 +426,27 @@ class Framework:
         if handle.bundle.get_state() != Bundle.UNINSTALLED:
             handle.bundle.uninstall()
         sys.modules.pop(handle.module_name, None)
+        self._components.pop(handle.component_name, None)
+
+    def list_components(self) -> list:
+        """
+        Every native component currently installed in this Framework instance: its own module,
+        class name, and the fully-qualified dotted path of every specification it provides
+        (resolve any of these with ycappuccino.core.component_factory.resolve_class). One entry
+        per installed component, native components created via instantiate_component() included;
+        legacy iPOPO-bundle components (installed via @ComponentFactory, not through
+        describe_component) are not included - see README, "Installer un composant à l'exécution".
+
+        [{"module": "myapp.greeting", "class": "Greeter", "provides": ["myapp.greeting.IGreeter"]}]
+        """
+        return [
+            {
+                "module": description.component.__module__,
+                "class": description.component.__qualname__,
+                "provides": list(description.provides_qualified),
+            }
+            for description in self._components.values()
+        ]
 
 
 def _is_test_module(module_name) -> bool:
