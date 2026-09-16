@@ -72,6 +72,12 @@ class Binding:
 class ComponentDescription:
     component: type
     provides: list = dataclasses.field(default_factory=list)
+    # provides_qualified[i] is the fully-qualified "module.QualName" path of the specification
+    # whose short name is provides[i] - same index, same specification. Resolve it back to the
+    # real class with resolve_class(). The one exception is the Pelix HTTP servlet marker
+    # ("pelix.http.servlet", added when the component implements IHttpServlet): it is not a
+    # Python class, so it appears identically in both lists at its index and is not resolvable.
+    provides_qualified: list = dataclasses.field(default_factory=list)
     requires: list = dataclasses.field(default_factory=list)
     properties: dict = dataclasses.field(default_factory=dict)
     bindings: list = dataclasses.field(default_factory=list)
@@ -116,7 +122,8 @@ def is_component(klass: Any) -> bool:
 
 def describe_component(klass: type) -> ComponentDescription:
     """read the wiring of a component from its constructor and bind method"""
-    description = ComponentDescription(klass, provides=_provided_specifications(klass))
+    provides, provides_qualified = _provided_specifications(klass)
+    description = ComponentDescription(klass, provides=provides, provides_qualified=provides_qualified)
 
     for parameter, annotation in _constructor_parameters(klass):
         dependency = _dependency(annotation)
@@ -144,6 +151,7 @@ def describe_component(klass: type) -> ComponentDescription:
 
     if issubclass(klass, IHttpServlet):
         description.provides.append(http.HTTP_SERVLET)
+        description.provides_qualified.append(http.HTTP_SERVLET)
         if "path" not in description.properties:
             raise TypeError(f"{description.name} implements IHttpServlet but declares no 'path' property")
 
@@ -402,12 +410,15 @@ def _bindings(klass: type) -> list:
     return bindings
 
 
-def _provided_specifications(klass: type) -> list:
+def _provided_specifications(klass: type) -> tuple:
+    """(short names, fully-qualified dotted paths), index-aligned - see ComponentDescription"""
     specifications = []
+    qualified = []
     for base in klass.__mro__:
         if base in _FRAMEWORK_CLASSES:
             continue
         if base is klass or issubclass(base, _INTERFACE_ROOTS):
             if base.__name__ not in specifications:
                 specifications.append(base.__name__)
-    return specifications
+                qualified.append(f"{base.__module__}.{base.__qualname__}")
+    return specifications, qualified

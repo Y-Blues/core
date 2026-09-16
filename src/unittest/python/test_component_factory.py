@@ -213,6 +213,24 @@ class TestDescribeComponent(unittest.TestCase):
             ["ManagedGreeter", "Greeter", "IGreeter", "IHost", "YCappuccinoRemote"],
         )
 
+    def test_provides_qualified_is_index_aligned_with_provides(self):
+        description = describe_component(ManagedGreeter)
+
+        self.assertEqual(description.provides, ["ManagedGreeter", "Greeter", "IGreeter", "IHost", "YCappuccinoRemote"])
+        self.assertEqual(
+            description.provides_qualified,
+            [
+                __name__ + ".ManagedGreeter",
+                __name__ + ".Greeter",
+                __name__ + ".IGreeter",
+                __name__ + ".IHost",
+                "ycappuccino.api.proxy.YCappuccinoRemote",
+            ],
+        )
+        for short_name, qualified_path in zip(description.provides, description.provides_qualified):
+            with self.subTest(specification=short_name):
+                self.assertEqual(resolve_class(qualified_path).__name__, short_name)
+
     def test_bind_annotation_declares_an_aggregate_binding(self):
         self.assertEqual(
             [binding.specification for binding in describe_component(Collector).bindings],
@@ -224,6 +242,15 @@ class TestDescribeComponent(unittest.TestCase):
             describe_component(Servlet).provides,
             ["Servlet", "IHttpServlet", "pelix.http.servlet"],
         )
+
+    def test_http_servlet_marker_is_mirrored_identically_in_provides_qualified(self):
+        # "pelix.http.servlet" is a raw Pelix specification name, not a Python class: it has no
+        # qualified path of its own, so it appears unchanged at the same index in both lists.
+        description = describe_component(Servlet)
+
+        self.assertEqual(description.provides[-1], "pelix.http.servlet")
+        self.assertEqual(description.provides_qualified[-1], "pelix.http.servlet")
+        self.assertEqual(len(description.provides), len(description.provides_qualified))
 
     def test_http_servlet_without_a_path_parameter_is_rejected(self):
         with self.assertRaises(TypeError):
