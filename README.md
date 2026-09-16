@@ -205,6 +205,22 @@ Framework.get_framework().destroy_component(handle)
 
 Ce mécanisme est le même que celui utilisé par `load_bundles()` pour les composants découverts au scan (`describe_component`, `create_factory_module`) ; il n'est pas lié à un modèle de données particulier — n'importe quel sous-projet peut l'utiliser pour piloter des instances de composants depuis ses propres données.
 
+## Introspecter les composants natifs installés
+
+`Framework.get_framework().list_components()` renvoie la liste des composants natifs actuellement installés dans ce `Framework` — ceux découverts au scan de `bundle_prefix` par `load_bundles()` **et** ceux créés à l'exécution par `instantiate_component()` (retirés de la liste par `destroy_component()`) :
+
+```python
+Framework.get_framework().list_components()
+# [{"module": "myapp.greeting", "class": "Greeter", "provides": ["myapp.greeting.IGreeter", "myapp.greeting.Greeter"]}]
+```
+
+- `module` et `class` identifient la classe du composant lui-même (pas son instance).
+- `provides` contient, pour chaque spécification publiée par le composant, son **chemin qualifié** `module.NomDeClasse` uniquement (pas les noms courts utilisés par Pelix, comme `IGreeter` — pour ceux-là, appelle `describe_component` directement). C'est exactement `ComponentDescription.provides_qualified`, le pendant qualifié de `ComponentDescription.provides` produit par `describe_component()` : les deux listes sont alignées index à index (`provides[i]` et `provides_qualified[i]` désignent la même spécification, l'un sous forme de nom court utilisé tel quel comme `objectClass` Pelix, l'autre sous forme de chemin qualifié). Un chemin qualifié se résout en la classe réelle avec `ycappuccino.core.component_factory.resolve_class(chemin)` — c'est l'usage prévu de `provides` : retrouver, à partir d'un nom court découvert ailleurs (par exemple via la console Pelix ou un service Pelix), la classe Python correspondante sans avoir à la connaître d'avance.
+- **Les bundles iPOPO legacy (classes décorées `@ComponentFactory`, installées telles quelles comme bundle Pelix) ne sont pas dans cette liste** : ils n'existent pas sous forme de `ComponentDescription`, `describe_component` ne leur est jamais appliqué. Seuls les composants natifs (voir « Écrire un composant ») y figurent.
+- `Framework.stop()` vide cette liste.
+
+**Piège de timing, à connaître avant de construire quoi que ce soit dessus.** Le motif recommandé pour créer un composant au démarrage sans provoquer l'interblocage documenté ci-dessus (« Installer un composant à l'exécution ») est de lancer l'appel à `instantiate_component` depuis un thread séparé, sans l'attendre (voir `ycappuccino-component-creator`, `ComponentActivator.start()`) — le `start()` du composant découvreur revient donc *avant* que les instances qu'il crée n'existent réellement. Or `load_bundles()` scanne et instancie tous les composants d'un même `bundle_prefix` en une seule passe, dans un ordre non garanti : rien n'assure qu'un composant scanné après le découvreur, dans cette même passe, voie déjà exister les instances que celui-ci crée en arrière-plan — ni `list_components()`, ni les services Pelix qu'elles publient. Ce n'est pas un défaut de `list_components()` ni d'`instantiate_component()` : c'est la conséquence directe, inévitable, du fait d'éviter l'interblocage en ne bloquant pas sur le résultat. En pratique, tout code qui utiliserait `list_components()` et `instantiate_component()` pour satisfaire la **dépendance obligatoire** d'un autre composant natif doit soit tolérer une arrivée tardive (dépendance optionnelle ou collection, jamais requise au sens strict), soit lui-même être créé dynamiquement après coup plutôt que découvert par le scan normal — jamais supposer que la création dynamique a eu le temps de se terminer avant que le scan `bundle_prefix` de la même passe n'ait fini d'instancier les autres composants.
+
 ## Servlets HTTP
 
 Un composant qui implémente `IHttpServlet` (`ycappuccino.api.http`) devient une servlet Pelix, sans aucun décorateur :
