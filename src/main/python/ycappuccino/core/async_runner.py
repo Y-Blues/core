@@ -68,14 +68,20 @@ class AsyncRunner(object):
     def _get_loop(self) -> asyncio.AbstractEventLoop:
         with self._lock:
             if self._loop is None:
-                loop = asyncio.new_event_loop()
-                try:
-                    thread = self._thread_factory(target=loop.run_forever, name=self._name, daemon=True)
-                    thread.start()
-                except RuntimeError:
-                    loop.close()
-                    raise
-                self._loop, self._thread = loop, thread
+                # the loop is created by the thread itself: where no thread can start, none is ever
+                # created (under Pyodide, new_event_loop() would replace the page's running loop)
+                created: dict = {}
+                ready = threading.Event()
+
+                def serve() -> None:
+                    created["loop"] = asyncio.new_event_loop()
+                    ready.set()
+                    created["loop"].run_forever()
+
+                thread = self._thread_factory(target=serve, name=self._name, daemon=True)
+                thread.start()
+                ready.wait()
+                self._loop, self._thread = created["loop"], thread
             return self._loop
 
 

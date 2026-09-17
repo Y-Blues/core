@@ -1,6 +1,7 @@
 import asyncio
 import threading
 import unittest
+import unittest.mock
 
 import support  # noqa: F401
 
@@ -81,6 +82,15 @@ class TestAsyncRunnerWithoutThreads(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.runner.run(fail())
+
+    def test_no_event_loop_is_created(self):
+        # under Pyodide, new_event_loop() replaces the page's loop: futures made afterwards by pyfetch
+        # would belong to a loop that never runs
+        async def value():
+            return 1
+
+        with unittest.mock.patch("asyncio.new_event_loop", side_effect=AssertionError("loop created")):
+            self.assertEqual(self.runner.run(value()), 1)
 
     def test_nested_runs_complete(self):
         async def inner():
