@@ -102,7 +102,7 @@ Une classe est un composant si c'est une **sous-classe concrète de `YCappuccino
 | `count: int = 3` | **propriété** : valeur par défaut, surchargeable dans `application.yml`, publiée comme propriété du service |
 | `name: str` sans valeur par défaut | erreur : le composant est ignoré et l'erreur est loggée |
 
-Un type est injectable s'il hérite de `YCappuccinoComponent` ou de `YCappuccinoRemote` (interfaces legacy de `api`). Les annotations en chaîne (`"IGreeter"`) sont résolues.
+Un type est injectable s'il hérite de `YCappuccinoComponent`. Les annotations en chaîne (`"IGreeter"`) sont résolues.
 
 ### Services publiés
 
@@ -183,7 +183,6 @@ dependencies_layer:
 |---|---|---|
 | `Configuration` | `IConfiguration` | lit et écrit `conf/config.properties` dans le répertoire courant : `get(key, default)`, `set`, `has` ; `true`/`false` sont convertis en booléens |
 | `ActivityLogger` | `IActivityLogger`, propriété `name=main` | logger fichier `data/log/Log-Activity-main.log`, réglable par `activity.logger.main.file`, `.level`, `.format`, `.nb`, `.size` dans `config.properties` |
-| `ListComponent` | `IListComponent` | recense les services `YCappuccinoRemote` ; `call(id, méthode)` |
 
 ## Installer un composant à l'exécution
 

@@ -233,7 +233,6 @@ class TestFrameworkApplication(unittest.TestCase):
     def test_core_bundles_are_started(self):
         self.get_service("IConfiguration")
         self.get_service("IActivityLogger", "(name=main)")
-        self.get_service("IListComponent")
 
     def test_activity_logger_writes_in_the_application_data_directory(self):
         log_file = os.path.join(self.app.root, "data", "log", "Log-Activity-main.log")

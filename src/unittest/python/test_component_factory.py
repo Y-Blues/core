@@ -14,7 +14,6 @@ from ycappuccino.api.core_base import (
     YCappuccinoType,
 )
 from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
-from ycappuccino.api.proxy import YCappuccinoRemote
 from ycappuccino.core.async_runner import AsyncRunner
 from ycappuccino.core.component_factory import (
     Requirement,
@@ -25,8 +24,8 @@ from ycappuccino.core.component_factory import (
 )
 
 
-class IHost(YCappuccinoRemote):
-    """legacy-style interface: injectable because it derives from YCappuccinoRemote"""
+class IHost(YCappuccinoComponent, ABC):
+    """a second interface implemented by ManagedGreeter"""
 
 
 class IGreeter(YCappuccinoComponent, ABC):
@@ -118,7 +117,7 @@ class ServletWithoutPath(Lifecycle, IHttpServlet):
 class ManagedGreeter(Greeter, IHost):
 
     def __init__(self):
-        IHost.__init__(self)
+        pass
 
 
 @ComponentFactory("LegacyGreeterFactory")
@@ -207,16 +206,23 @@ class TestDescribeComponent(unittest.TestCase):
 
         self.assertEqual(describe_component(FileLogger).provides, ["FileLogger", "IActivityLogger"])
 
-    def test_remote_interfaces_are_provided(self):
-        self.assertEqual(
-            describe_component(ManagedGreeter).provides,
-            ["ManagedGreeter", "Greeter", "IGreeter", "IHost", "YCappuccinoRemote"],
-        )
+    def test_every_interface_is_provided(self):
+        self.assertEqual(describe_component(ManagedGreeter).provides, ["ManagedGreeter", "Greeter", "IGreeter", "IHost"])
+
+    def test_a_parameter_typed_with_a_class_outside_ycappuccino_component_is_not_a_dependency(self):
+        class Plain:
+            pass
+
+        class Holder(Lifecycle, YCappuccinoComponent):
+            def __init__(self, plain: Plain = None):
+                pass
+
+        self.assertEqual(describe_component(Holder).requires, [])
 
     def test_provides_qualified_is_index_aligned_with_provides(self):
         description = describe_component(ManagedGreeter)
 
-        self.assertEqual(description.provides, ["ManagedGreeter", "Greeter", "IGreeter", "IHost", "YCappuccinoRemote"])
+        self.assertEqual(description.provides, ["ManagedGreeter", "Greeter", "IGreeter", "IHost"])
         self.assertEqual(
             description.provides_qualified,
             [
@@ -224,7 +230,6 @@ class TestDescribeComponent(unittest.TestCase):
                 __name__ + ".Greeter",
                 __name__ + ".IGreeter",
                 __name__ + ".IHost",
-                "ycappuccino.api.proxy.YCappuccinoRemote",
             ],
         )
         for short_name, qualified_path in zip(description.provides, description.provides_qualified):

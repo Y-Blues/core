@@ -45,11 +45,11 @@ from ycappuccino.api.core_base import (
     _YCappuccinoType,
 )
 from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
-from ycappuccino.api.proxy import Proxy, YCappuccinoRemote
+from ycappuccino.api.proxy import Proxy
 from ycappuccino.core.async_runner import AsyncRunner
 
 # classes whose subclasses are service specifications
-_INTERFACE_ROOTS = (YCappuccinoComponent, YCappuccinoRemote)
+_INTERFACE_ROOTS = (YCappuccinoComponent,)
 # base classes that are never published
 _FRAMEWORK_CLASSES = (YCappuccinoComponent, YCappuccinoComponentBind)
 
