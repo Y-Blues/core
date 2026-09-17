@@ -27,20 +27,20 @@ class ListComponent(IListComponent):
         self._map_component = {}
         self._logger = logger
 
-    async def bind(self, a_service: YCappuccinoRemote):
+    async def bind(self, a_service: YCappuccinoRemote) -> None:
         """bind statement for this component"""
         self._map_component[a_service.id()] = a_service
 
-    async def un_bind(self, a_service: YCappuccinoRemote):
+    async def un_bind(self, a_service: YCappuccinoRemote) -> None:
         """unbind statement for this component"""
         del self._map_component[a_service.id()]
 
-    def call(self, a_comp_name, a_method):
+    def call(self, a_comp_name: str, a_method: str) -> None:
         if a_comp_name in self._map_component.keys():
             getattr(self._map_component[a_comp_name], a_method)()
 
-    async def start(self):
+    async def start(self) -> None:
         self._logger.info("start list component")
 
-    async def stop(self):
+    async def stop(self) -> None:
         self._logger.info("stop list component")

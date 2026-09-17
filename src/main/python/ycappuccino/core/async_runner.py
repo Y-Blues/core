@@ -7,22 +7,23 @@ import asyncio
 import inspect
 import threading
 from concurrent.futures import ThreadPoolExecutor
+from typing import Any, Awaitable
 
 
-async def _await(awaitable):
+async def _await(awaitable: Awaitable) -> Any:
     return await awaitable
 
 
 class AsyncRunner(object):
     """event loop running in a background thread, started on first use"""
 
-    def __init__(self, name="ycappuccino-async"):
+    def __init__(self, name: str = "ycappuccino-async") -> None:
         self._name = name
         self._lock = threading.Lock()
         self._loop = None
         self._thread = None
 
-    def run(self, result):
+    def run(self, result: Any) -> Any:
         """return the result, or wait for it when it is awaitable and return its value"""
         if not inspect.isawaitable(result):
             return result
@@ -34,7 +35,7 @@ class AsyncRunner(object):
 
         return asyncio.run_coroutine_threadsafe(_await(result), self._get_loop()).result()
 
-    def shutdown(self):
+    def shutdown(self) -> None:
         with self._lock:
             loop, thread = self._loop, self._thread
             self._loop = self._thread = None
@@ -44,7 +45,7 @@ class AsyncRunner(object):
             thread.join()
             loop.close()
 
-    def _get_loop(self):
+    def _get_loop(self) -> asyncio.AbstractEventLoop:
         with self._lock:
             if self._loop is None:
                 self._loop = asyncio.new_event_loop()

@@ -12,7 +12,7 @@ import os
 from ycappuccino.core.framework import Framework
 
 
-def main(argv=None):
+def main(argv: list[str] | None = None) -> None:
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(description="start a YCappuccino application")
     parser.add_argument(

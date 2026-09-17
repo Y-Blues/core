@@ -46,6 +46,7 @@ from ycappuccino.api.core_base import (
 )
 from ycappuccino.api.http import HttpRequest, HttpResponse, IHttpServlet
 from ycappuccino.api.proxy import Proxy, YCappuccinoRemote
+from ycappuccino.core.async_runner import AsyncRunner
 
 # classes whose subclasses are service specifications
 _INTERFACE_ROOTS = (YCappuccinoComponent, YCappuccinoRemote)
@@ -160,7 +161,7 @@ def describe_component(klass: type) -> ComponentDescription:
 
 def create_factory_module(
     description: ComponentDescription,
-    runner,
+    runner: AsyncRunner,
     instance_properties: Optional[dict] = None,
     name: Optional[str] = None,
 ) -> ModuleType:
@@ -180,7 +181,7 @@ def create_factory_module(
     }
     bind_fields = {binding.field for binding in description.bindings}
 
-    def validate(self, context):
+    def validate(self, context: Any) -> None:
         self._ycappuccino_lists = {field: [] for field in list_fields}
         self._ycappuccino_bound = {}
         arguments = {}
@@ -205,7 +206,7 @@ def create_factory_module(
             self._obj = None
             raise
 
-    def invalidate(self, context):
+    def invalidate(self, context: Any) -> None:
         component_object, self._obj = self._obj, None
         self._ycappuccino_lists = None
         self._ycappuccino_bound = None
@@ -222,7 +223,7 @@ def create_factory_module(
 
     if list_fields or bind_fields:
 
-        def bind(self, field, service, service_reference):
+        def bind(self, field: str, service: Any, service_reference: Any) -> None:
             if field in list_fields:
                 # services bound before validation are added to the list by validate
                 if self._ycappuccino_lists is not None:
@@ -230,7 +231,7 @@ def create_factory_module(
             elif self._obj is not None:
                 runner.run(self._obj.bind(_unwrap(service)))
 
-        def unbind(self, field, service, service_reference):
+        def unbind(self, field: str, service: Any, service_reference: Any) -> None:
             if field in list_fields:
                 if self._ycappuccino_lists is not None:
                     _remove_service(self, field, service)
@@ -244,7 +245,7 @@ def create_factory_module(
         namespace["_ycappuccino_unbind"] = unbind
 
     if issubclass(component, IHttpServlet):
-        def _http_request(pelix_request, method: str) -> "HttpRequest":
+        def _http_request(pelix_request: Any, method: str) -> "HttpRequest":
             full_path = pelix_request.get_path()
             query = dict(parse_qsl(urlsplit(full_path).query))
             return HttpRequest(
@@ -257,13 +258,13 @@ def create_factory_module(
                 body=pelix_request.read_data() or b"",
             )
 
-        def _send(pelix_response, http_response: "HttpResponse") -> None:
+        def _send(pelix_response: Any, http_response: "HttpResponse") -> None:
             for name, value in http_response.headers.items():
                 pelix_response.set_header(name, value)
             pelix_response.send_content(http_response.status, http_response.body, http_response.content_type)
 
-        def _do(method: str):
-            def handler(self, pelix_request, pelix_response):
+        def _do(method: str) -> typing.Callable:
+            def handler(self, pelix_request: Any, pelix_response: Any) -> None:
                 request = _http_request(pelix_request, method)
                 try:
                     result = runner.run(self._obj.handle(request))
@@ -281,7 +282,7 @@ def create_factory_module(
         _servlet_methods = frozenset(("do_GET", "do_POST", "do_PUT", "do_DELETE"))
         _original_getattribute = namespace.get("__getattribute__", Proxy.__getattribute__)
 
-        def __getattribute__(self, name: str):
+        def __getattribute__(self, name: str) -> Any:
             if name in _servlet_methods:
                 return object.__getattribute__(self, name)
             return _original_getattribute(self, name)
@@ -335,7 +336,7 @@ def _unwrap(service: Any) -> Any:
     return service
 
 
-def _add_service(proxy, field: str, service: Any) -> None:
+def _add_service(proxy: Proxy, field: str, service: Any) -> None:
     """add the component object of a bound service to the live list of the field, once"""
     key = (field, id(service))
     if key not in proxy._ycappuccino_bound:
@@ -344,7 +345,7 @@ def _add_service(proxy, field: str, service: Any) -> None:
         proxy._ycappuccino_lists[field].append(component_object)
 
 
-def _remove_service(proxy, field: str, service: Any) -> None:
+def _remove_service(proxy: Proxy, field: str, service: Any) -> None:
     key = (field, id(service))
     if key not in proxy._ycappuccino_bound:
         return
@@ -381,7 +382,7 @@ def _dependency(annotation: Any) -> Optional[tuple]:
     return None
 
 
-def _parameters(function) -> list:
+def _parameters(function: typing.Callable) -> list:
     """(parameter, resolved annotation) of a method, without self, *args and **kwargs"""
     try:
         hints = typing.get_type_hints(function)

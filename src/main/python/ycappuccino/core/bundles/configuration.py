@@ -4,6 +4,8 @@ import os
 import logging
 
 import shutil
+from typing import Any
+
 from ycappuccino.api.core import IConfiguration
 
 FILE_NAME = {"key": "file_name", "default": "config.properties"}
@@ -33,13 +35,13 @@ class Configuration(IConfiguration):
 
         self._log.info("Configuration size : [{0}]".format(len(self._dict)))
 
-    async def start(self):
+    async def start(self) -> None:
         self._log.info("start configuration")
 
-    async def stop(self):
+    async def stop(self) -> None:
         self._log.info("stop configuration")
 
-    def get(self, key, default=None):
+    def get(self, key: str, default: Any = None) -> Any:
         """
         Get configuration value.
 
@@ -54,7 +56,7 @@ class Configuration(IConfiguration):
             return False
         return w_val
 
-    def has(self, key):
+    def has(self, key: str) -> bool:
         """
         Determine whether a configuration exists.
 
@@ -63,11 +65,11 @@ class Configuration(IConfiguration):
         """
         return key in self._dict
 
-    def backupConfig(self):
+    def backupConfig(self) -> None:
         """backup last configuration file"""
         shutil.copy(self._path, self._path + ".back")
 
-    def set(self, key, value):
+    def set(self, key: str, value: Any) -> None:
         """
         Set configuration value.
 
@@ -79,7 +81,7 @@ class Configuration(IConfiguration):
         self._dict[key] = value
         self.write(self._path, self._dict)
 
-    def _get_path(self):
+    def _get_path(self) -> str:
         path = self.get_data()
         if path is not None:
             return os.path.join(path, "conf", self._file_name)
@@ -88,14 +90,14 @@ class Configuration(IConfiguration):
             return os.path.join(path, "base", "conf", self._file_name)
         return self._file_name
 
-    def get_base(self):
+    def get_base(self) -> str:
         return os.getcwd() + "/" + "conf"
 
-    def get_data(self):
+    def get_data(self) -> str:
         return os.getcwd() + "/"
 
     @classmethod
-    def read(cls, path, aLogger=None):
+    def read(cls, path: str, aLogger: logging.Logger | None = None) -> dict | None:
         if not os.path.isfile(path):
             return None
         props = {}
@@ -118,7 +120,7 @@ class Configuration(IConfiguration):
         return props
 
     @classmethod
-    def write(cls, path, props):
+    def write(cls, path: str, props: dict) -> None:
         if not os.path.isfile(path):
             dir = os.path.dirname(path)
             if dir and dir not in ["", "."] and not os.path.exists(dir):

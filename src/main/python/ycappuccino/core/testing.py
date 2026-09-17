@@ -9,10 +9,12 @@ import sys
 import tempfile
 import textwrap
 import time
+import types
 import uuid
+from typing import Any, Callable
 
 
-def wait_until(predicate, timeout=5.0):
+def wait_until(predicate: Callable[[], Any], timeout: float = 5.0) -> Any:
     """poll the predicate until it returns a truthy value or the timeout expires"""
     deadline = time.monotonic() + timeout
     while True:
@@ -22,7 +24,7 @@ def wait_until(predicate, timeout=5.0):
         time.sleep(0.01)
 
 
-def read_file(path):
+def read_file(path: str) -> str:
     if not os.path.exists(path):
         return ""
     with open(path) as file:
@@ -35,7 +37,7 @@ class TemporaryApplication(object):
     Every occurrence of PACKAGE in file names and contents is replaced by a unique package name.
     """
 
-    def __init__(self, files):
+    def __init__(self, files: dict[str, str]) -> None:
         self.package = "ycctest_" + uuid.uuid4().hex[:8]
         self.root = os.path.realpath(tempfile.mkdtemp(prefix="ycappuccino-"))
         self._previous_cwd = None
@@ -46,18 +48,18 @@ class TemporaryApplication(object):
                 file.write(textwrap.dedent(content).replace("PACKAGE", self.package))
 
     @property
-    def yml_path(self):
+    def yml_path(self) -> str:
         return os.path.join(self.root, "conf", "application.yml")
 
-    def module(self, name):
+    def module(self, name: str) -> types.ModuleType:
         return sys.modules[self.package + "." + name]
 
-    def open(self):
+    def open(self) -> "TemporaryApplication":
         self._previous_cwd = os.getcwd()
         os.chdir(self.root)
         return self
 
-    def close(self):
+    def close(self) -> None:
         if self._previous_cwd is not None:
             os.chdir(self._previous_cwd)
             self._previous_cwd = None

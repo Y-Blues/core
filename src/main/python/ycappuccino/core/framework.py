@@ -31,7 +31,8 @@ import logging
 import os
 import pkgutil
 import sys
-from typing import Optional, Union
+from types import ModuleType
+from typing import Any, Optional, Union
 
 import pelix.services  # type: ignore
 import yaml
@@ -79,14 +80,14 @@ class ComponentHandle:
 class ListenerFactories:
     """index the iPOPO factories by provided specification and notify subscribers of new factories"""
 
-    def __init__(self, a_context):
+    def __init__(self, a_context: Any) -> None:
         self._context = a_context
         self._factory_by_spec = {}
         self._notifier_by_spec = {}
         with use_ipopo(self._context) as ipopo:
             ipopo.add_listener(self)
 
-    def handle_ipopo_event(self, event):
+    def handle_ipopo_event(self, event: Any) -> None:
         """
         event: A IPopoEvent object
         """
@@ -104,10 +105,10 @@ class ListenerFactories:
                 while w_factory_name in w_factories:
                     w_factories.remove(w_factory_name)
 
-    def subscribe_notifier(self, a_service_spec, a_notifier):
+    def subscribe_notifier(self, a_service_spec: str, a_notifier: Any) -> None:
         self._notifier_by_spec.setdefault(a_service_spec, []).append(a_notifier)
 
-    def get_factories_by_service_specification(self, a_service_spec):
+    def get_factories_by_service_specification(self, a_service_spec: str) -> list:
         return list(self._factory_by_spec.get(a_service_spec, []))
 
 
@@ -115,7 +116,7 @@ class Framework:
 
     _singleton = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.item_manager = None
         self.context = None
         self.listener_factory = None
@@ -137,17 +138,17 @@ class Framework:
         self._components: dict[str, ComponentDescription] = {}
 
     @classmethod
-    def get_framework(cls):
+    def get_framework(cls) -> "Framework":
         if cls._singleton is None:
             cls._singleton = Framework()
         return cls._singleton
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls) -> "Framework":
         """alias of get_framework"""
         return cls.get_framework()
 
-    def set_item_manager(self, a_item_manager):
+    def set_item_manager(self, a_item_manager: Any) -> None:
         """set item manager"""
         self.item_manager = a_item_manager
 
@@ -168,13 +169,13 @@ class Framework:
     def is_http_server(self) -> bool:
         return bool(self._http_server_config().get("active", False))
 
-    def get_http_server_port(self):
+    def get_http_server_port(self) -> int | None:
         return self._http_server_config().get("port")
 
-    def get_http_server_ip(self):
+    def get_http_server_ip(self) -> str | None:
         return self._http_server_config().get("ip", self.get_ip())
 
-    def get_ip(self):
+    def get_ip(self) -> str | None:
         return self._config().get("ip")
 
     def is_shell_console(self) -> bool:
@@ -187,10 +188,10 @@ class Framework:
         except ValueError:
             return False
 
-    def get_layer_properties(self, layer_name) -> dict:
+    def get_layer_properties(self, layer_name: str) -> dict:
         return (self.application_yaml.get("layers") or {}).get(layer_name) or {}
 
-    def get_app_name(self):
+    def get_app_name(self) -> str | None:
         return self.application_yaml.get("name")
 
     def get_bundle_prefix(self) -> list:
@@ -224,7 +225,7 @@ class Framework:
 
     # ------------------------------------------------------------------ lifecycle
 
-    def init(self, yml_path):
+    def init(self, yml_path: str) -> None:
         """read the application configuration, start Pelix and load the bundles"""
         with open(yml_path, "r") as file:
             self.application_yaml = yaml.safe_load(file) or {}
@@ -258,7 +259,7 @@ class Framework:
         if self.item_manager is not None:
             self.item_manager.load_items()
 
-    def start(self):
+    def start(self) -> None:
         """block until the framework stops; Ctrl+C stops it"""
         try:
             self.ipopo.wait_for_stop()
@@ -267,7 +268,7 @@ class Framework:
         finally:
             self.stop()
 
-    def stop(self):
+    def stop(self) -> None:
         """stop Pelix, which invalidates every component, and release the framework"""
         if self.ipopo is not None:
             self.ipopo.stop()
@@ -281,7 +282,7 @@ class Framework:
 
     # ------------------------------------------------------------------ bundles
 
-    def load_bundles(self):
+    def load_bundles(self) -> None:
         """import the modules of the scanned packages and install what they declare"""
         modules = self._import_modules([CORE_BUNDLES_PACKAGE] + self.get_bundle_prefix())
         active_layers = self.get_active_layers()
@@ -291,11 +292,11 @@ class Framework:
             except Exception:
                 _logger.exception("fail to load bundle %s", module.__name__)
 
-    def add_bundle_model(self, a_module_name, a_file):
+    def add_bundle_model(self, a_module_name: str, a_file: str) -> str:
         self.bundle_models_loaded_path_by_name.setdefault(a_module_name, a_file)
         return a_module_name
 
-    def _import_modules(self, package_names) -> list:
+    def _import_modules(self, package_names: list) -> list:
         modules = {}
         for package_name in package_names:
             for module_name in self._module_names(package_name):
@@ -308,7 +309,7 @@ class Framework:
                     _logger.debug("import error of bundle %s", module_name, exc_info=True)
         return list(modules.values())
 
-    def _module_names(self, package_name) -> list:
+    def _module_names(self, package_name: str) -> list:
         """the package and all its modules, test modules excepted"""
         try:
             package = importlib.import_module(package_name)
@@ -334,7 +335,7 @@ class Framework:
                     _logger.warning("fail to import package %s: %r", module_info.name, error)
         return names
 
-    def _read_layer_configuration(self, package):
+    def _read_layer_configuration(self, package: ModuleType) -> None:
         for path in list(package.__path__):
             for file_path in sorted(glob.glob(os.path.join(path, "conf", "config*.yaml"))):
                 try:
@@ -349,7 +350,7 @@ class Framework:
                     name for name, enabled in dependencies.items() if enabled
                 )
 
-    def _install_module(self, module, active_layers):
+    def _install_module(self, module: ModuleType, active_layers: set) -> None:
         classes = [
             klass
             for _, klass in inspect.getmembers(module, inspect.isclass)
@@ -372,7 +373,7 @@ class Framework:
         if any(_is_model(klass) for klass in classes):
             self.add_bundle_model(module.__name__, module.__file__)
 
-    def _install_component(self, klass):
+    def _install_component(self, klass: type) -> None:
         description = describe_component(klass)
         module = create_factory_module(
             description, self._async_runner, self._component_properties(description)
@@ -381,7 +382,7 @@ class Framework:
         self.context.install_bundle(module.__name__).start()
         self._components[description.name] = description
 
-    def _component_properties(self, description) -> dict:
+    def _component_properties(self, description: ComponentDescription) -> dict:
         """properties of a component set in application.yml, by class name or qualified name"""
         components = self.application_yaml.get("components") or {}
         properties = dict(components.get(description.component.__name__) or {})
@@ -449,7 +450,7 @@ class Framework:
         ]
 
 
-def _is_test_module(module_name) -> bool:
+def _is_test_module(module_name: str) -> bool:
     parts = module_name.split(".")
     return (
         parts[-1].startswith("test_")
@@ -458,16 +459,16 @@ def _is_test_module(module_name) -> bool:
     )
 
 
-def _is_layer_active(klass, active_layers) -> bool:
+def _is_layer_active(klass: type, active_layers: set) -> bool:
     layer = getattr(klass, utils.LAYER_ATTRIBUTE, None)
     return layer is None or any(fnmatch.fnmatchcase(layer, pattern) for pattern in active_layers)
 
 
-def _is_model(klass) -> bool:
+def _is_model(klass: type) -> bool:
     return any(
         item.get("_class_obj") is klass for item in model_decorators.map_item_by_class.values()
     )
 
 
-def _log_walk_error(package_name):
+def _log_walk_error(package_name: str) -> None:
     _logger.warning("fail to import package %s", package_name)

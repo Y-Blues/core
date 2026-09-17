@@ -65,14 +65,14 @@ class ActivityLogger(IActivityLogger):
 
         self.addHandler(w_handler)
 
-    def get_prefix_config(self):
+    def get_prefix_config(self) -> str:
         """get the prefix for activity log depending of the instance default activity.logger"""
         if self._name == "default":
             return PREFIX_PROPERTY
         else:
             return PREFIX_PROPERTY + "." + self._name
 
-    def get_default_log_name(self):
+    def get_default_log_name(self) -> str:
         if self._name != "default":
             return "Log-Activity-{}.log".format(self._name)
         else:
@@ -84,7 +84,7 @@ class ActivityLogger(IActivityLogger):
     async def stop(self) -> None:
         self.info(f"{self._name} is invalid")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "filename={}, nb_file={}, file_size={}, level={}".format(
             self._file, self._file_nb, self._file_size, self._level
         )
