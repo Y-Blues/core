@@ -254,7 +254,8 @@ def create_factory_module(
                 prefix=pelix_request.get_prefix_path(),
                 sub_path=urlsplit(pelix_request.get_sub_path()).path,
                 query=query,
-                headers=dict(pelix_request.get_headers()),
+                # HTTP header names are case-insensitive; servlets always see them lowercased
+                headers={name.lower(): value for name, value in pelix_request.get_headers().items()},
                 body=pelix_request.read_data() or b"",
             )
 

@@ -36,6 +36,8 @@ APPLICATION = {
             async def handle(self, request: HttpRequest) -> HttpResponse:
                 if request.sub_path == "/boom":
                     raise RuntimeError("boom")
+                if request.sub_path == "/headers":
+                    return HttpResponse(status=200, body=json.dumps(request.headers).encode())
                 body = json.dumps(
                     {"method": request.method, "sub_path": request.sub_path, "query": request.query}
                 ).encode()
@@ -61,8 +63,8 @@ class TestHttpServletInFramework(unittest.TestCase):
         cls.addClassCleanup(cls.framework.stop)
         wait_until(lambda: cls.framework.context.get_service_reference("Echo"))
 
-    def request(self, method, path, body=None):
-        req = urllib.request.Request(f"http://localhost:{PORT}{path}", data=body, method=method)
+    def request(self, method, path, body=None, headers=None):
+        req = urllib.request.Request(f"http://localhost:{PORT}{path}", data=body, method=method, headers=headers or {})
         try:
             with urllib.request.urlopen(req, timeout=5) as response:
                 return response.status, dict(response.getheaders()), response.read()
@@ -87,6 +89,13 @@ class TestHttpServletInFramework(unittest.TestCase):
         status, _, _ = self.request("GET", "/echo/boom")
 
         self.assertEqual(status, 500)
+
+    def test_header_names_reach_the_servlet_lowercased(self):
+        _, _, body = self.request("GET", "/echo/headers", headers={"Authorization": "Bearer x", "X-Custom-Header": "1"})
+
+        headers = json.loads(body)
+        self.assertEqual(headers.get("authorization"), "Bearer x")
+        self.assertEqual(headers.get("x-custom-header"), "1")
 
 
 PORT_OVERRIDE = 18081
