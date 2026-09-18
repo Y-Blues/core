@@ -275,12 +275,14 @@ def create_factory_module(
                 _send(pelix_response, result)
             return handler
 
-        for verb in ("GET", "POST", "PUT", "DELETE"):
+        # OPTIONS: a browser's CORS preflight, answered by the servlet like any other request
+        _verbs = ("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        for verb in _verbs:
             namespace[f"do_{verb}"] = _do(verb)
 
         # Override __getattribute__ to allow servlet methods to be accessed
         # even though they're on the proxy class, not the wrapped object
-        _servlet_methods = frozenset(("do_GET", "do_POST", "do_PUT", "do_DELETE"))
+        _servlet_methods = frozenset(f"do_{verb}" for verb in _verbs)
         _original_getattribute = namespace.get("__getattribute__", Proxy.__getattribute__)
 
         def __getattribute__(self, name: str) -> Any:

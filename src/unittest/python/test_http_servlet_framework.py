@@ -85,6 +85,13 @@ class TestHttpServletInFramework(unittest.TestCase):
         self.assertEqual(status, 201)
         self.assertEqual(json.loads(body)["method"], "POST")
 
+    def test_options_is_routed_to_handle(self):
+        # a browser's CORS preflight
+        status, _, body = self.request("OPTIONS", "/echo/create")
+
+        self.assertEqual(status, 201)
+        self.assertEqual(json.loads(body)["method"], "OPTIONS")
+
     def test_unhandled_exception_becomes_a_500(self):
         status, _, _ = self.request("GET", "/echo/boom")
 

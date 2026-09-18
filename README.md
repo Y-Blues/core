@@ -245,7 +245,7 @@ class Echo(IHttpServlet):
         pass
 ```
 
-`path` est une propriété ordinaire (surchargeable dans `application.yml`, `components: Echo: {path: /autre}`) : le framework l'expose aussi comme le chemin de la servlet Pelix. `handle` est appelée depuis le thread HTTP de Pelix, via le même pont synchrone que `start`/`stop` ; une exception qu'elle laisse s'échapper devient une réponse `500`. Cela suppose `config.http_server.active: true` dans `application.yml`.
+`path` est une propriété ordinaire (surchargeable dans `application.yml`, `components: Echo: {path: /autre}`) : le framework l'expose aussi comme le chemin de la servlet Pelix. `handle` reçoit les requêtes `GET`, `POST`, `PUT`, `DELETE` et `OPTIONS` (le pré-vol CORS d'un navigateur) ; elle est appelée depuis le thread HTTP de Pelix, via le même pont synchrone que `start`/`stop` ; une exception qu'elle laisse s'échapper devient une réponse `500`. Cela suppose `config.http_server.active: true` dans `application.yml`.
 
 ## Lancer une application
 
